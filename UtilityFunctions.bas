@@ -1,4 +1,3 @@
-Attribute VB_Name = "UtilityFunctions"
 Function CreateHeader(ws As Worksheet, Optional headerType As String = "Notes") As Boolean
     Dim i As Integer
     Dim infoSheet As Worksheet
@@ -27,22 +26,22 @@ Function CreateHeader(ws As Worksheet, Optional headerType As String = "Notes") 
             Case 2
                 Select Case headerType
                     Case "Details"
-                        ws.Cells(i, 1).Value = "√“¬≈–‡Õ’¬¥ª√–°Õ∫ß∫°“√‡ß‘π"
+                        ws.Cells(i, 1).Value = "‡∏£‡∏≤‡∏¢‡∏•‡∏∞‡πÄ‡∏≠‡∏µ‡∏¢‡∏î‡∏õ‡∏£‡∏∞‡∏Å‡∏≠‡∏ö‡∏á‡∏ö‡∏Å‡∏≤‡∏£‡πÄ‡∏á‡∏¥‡∏ô"
                     Case "Balance Sheet"
-                        ws.Cells(i, 1).Value = "ß∫∞“π–°“√‡ß‘π"
+                        ws.Cells(i, 1).Value = "‡∏á‡∏ö‡∏ê‡∏≤‡∏ô‡∏∞‡∏Å‡∏≤‡∏£‡πÄ‡∏á‡∏¥‡∏ô"
                     Case "Profit and Loss Statement"
-                        ws.Cells(i, 1).Value = "ß∫°”‰√¢“¥∑ÿπ ®”·π°§Ë“„™È®Ë“¬µ“¡ÀπÈ“∑’Ë - ·∫∫¢—Èπ‡¥’¬«"
+                        ws.Cells(i, 1).Value = "‡∏á‡∏ö‡∏Å‡∏≥‡πÑ‡∏£‡∏Ç‡∏≤‡∏î‡∏ó‡∏∏‡∏ô ‡∏à‡∏≥‡πÅ‡∏ô‡∏Å‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢‡∏ï‡∏≤‡∏°‡∏´‡∏ô‡πâ‡∏≤‡∏ó‡∏µ‡πà - ‡πÅ‡∏ö‡∏ö‡∏Ç‡∏±‡πâ‡∏ô‡πÄ‡∏î‡∏µ‡∏¢‡∏ß"
                     Case "Statement of Changes in Equity"
-                        ws.Cells(i, 1).Value = "ß∫°“√‡ª≈’Ë¬π·ª≈ß Ë«π¢ÕßºŸÈ∂◊ÕÀÿÈπ"
+                        ws.Cells(i, 1).Value = "‡∏á‡∏ö‡∏Å‡∏≤‡∏£‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô‡πÅ‡∏õ‡∏•‡∏á‡∏™‡πà‡∏ß‡∏ô‡∏Ç‡∏≠‡∏á‡∏ú‡∏π‡πâ‡∏ñ‡∏∑‡∏≠‡∏´‡∏∏‡πâ‡∏ô"
                     Case Else
-                        ws.Cells(i, 1).Value = "À¡“¬‡Àµÿª√–°Õ∫ß∫°“√‡ß‘π"
+                        ws.Cells(i, 1).Value = "‡∏´‡∏°‡∏≤‡∏¢‡πÄ‡∏´‡∏ï‡∏∏‡∏õ‡∏£‡∏∞‡∏Å‡∏≠‡∏ö‡∏á‡∏ö‡∏Å‡∏≤‡∏£‡πÄ‡∏á‡∏¥‡∏ô"
                 End Select
             Case 3
                 Select Case headerType
                     Case "Balance Sheet"
-                        headerText = "≥ «—π∑’Ë 31 ∏—π«“§¡ " & year
+                        headerText = "‡∏ì ‡∏ß‡∏±‡∏ô‡∏ó‡∏µ‡πà 31 ‡∏ò‡∏±‡∏ô‡∏ß‡∏≤‡∏Ñ‡∏° " & year
                     Case Else
-                        headerText = " ”À√—∫√Õ∫√–¬–‡«≈“∫—≠™’ µ—Èß·µË«—π∑’Ë 1 ¡°√“§¡ " & year & " ∂÷ß«—π∑’Ë 31 ∏—π«“§¡ " & year
+                        headerText = "‡∏™‡∏≥‡∏´‡∏£‡∏±‡∏ö‡∏£‡∏≠‡∏ö‡∏£‡∏∞‡∏¢‡∏∞‡πÄ‡∏ß‡∏•‡∏≤‡∏ö‡∏±‡∏ç‡∏ä‡∏µ ‡∏ï‡∏±‡πâ‡∏á‡πÅ‡∏ï‡πà‡∏ß‡∏±‡∏ô‡∏ó‡∏µ‡πà 1 ‡∏°‡∏Å‡∏£‡∏≤‡∏Ñ‡∏° " & year & " ‡∏ñ‡∏∂‡∏á‡∏ß‡∏±‡∏ô‡∏ó‡∏µ‡πà 31 ‡∏ò‡∏±‡∏ô‡∏ß‡∏≤‡∏Ñ‡∏° " & year
                 End Select
                 ws.Cells(i, 1).Value = headerText
                 ws.Range(ws.Cells(i, 1), ws.Cells(i, 9)).Borders(xlEdgeBottom).Weight = xlMedium
@@ -81,13 +80,13 @@ End Sub
 
 Sub AddHeaderDetails(ws As Worksheet, row As Long)
     With ws.Cells(row, 6)
-        .Value = "À¡“¬‡Àµÿ"
+        .Value = "‡∏´‡∏°‡∏≤‡∏¢‡πÄ‡∏´‡∏ï‡∏∏"
         .Font.Bold = True
         .Font.Underline = xlUnderlineStyleSingle
     End With
     
     With ws.Cells(row, 9)
-        .Value = "ÀπË«¬:∫“∑"
+        .Value = "‡∏´‡∏ô‡πà‡∏ß‡∏¢:‡∏ö‡∏≤‡∏ó"
         .Font.Bold = True
         .Font.Underline = xlUnderlineStyleSingle
         .HorizontalAlignment = xlRight
@@ -243,19 +242,19 @@ Sub AddGuaranteeNoteToFinancialStatements(targetWorkbook As Workbook)
             lastRow = ws.Cells(ws.Rows.Count, "B").End(xlUp).row
             
             ' Add the first note
-            ws.Cells(lastRow + 3, "B").Value = "À¡“¬‡Àµÿª√–°Õ∫ß∫°“√‡ß‘π‡ªÁπ Ë«πÀπ÷Ëß¢Õßß∫°“√‡ß‘ππ’È"
+            ws.Cells(lastRow + 3, "B").Value = "‡∏´‡∏°‡∏≤‡∏¢‡πÄ‡∏´‡∏ï‡∏∏‡∏õ‡∏£‡∏∞‡∏Å‡∏≠‡∏ö‡∏á‡∏ö‡∏Å‡∏≤‡∏£‡πÄ‡∏á‡∏¥‡∏ô‡πÄ‡∏õ‡πá‡∏ô‡∏™‡πà‡∏ß‡∏ô‡∏´‡∏ô‡∏∂‡πà‡∏á‡∏Ç‡∏≠‡∏á‡∏á‡∏ö‡∏Å‡∏≤‡∏£‡πÄ‡∏á‡∏¥‡∏ô‡∏ô‡∏µ‡πâ"
             
             ' Add the second note
-            ws.Cells(lastRow + 5, "B").Value = "¢Õ√—∫√Õß«Ë“‡ªÁπ√“¬°“√Õ—π∂Ÿ°µÈÕß·≈–‡ªÁπ§«“¡®√‘ß"
+            ws.Cells(lastRow + 5, "B").Value = "‡∏Ç‡∏≠‡∏£‡∏±‡∏ö‡∏£‡∏≠‡∏á‡∏ß‡πà‡∏≤‡πÄ‡∏õ‡πá‡∏ô‡∏£‡∏≤‡∏¢‡∏Å‡∏≤‡∏£‡∏≠‡∏±‡∏ô‡∏ñ‡∏π‡∏Å‡∏ï‡πâ‡∏≠‡∏á‡πÅ‡∏•‡∏∞‡πÄ‡∏õ‡πá‡∏ô‡∏Ñ‡∏ß‡∏≤‡∏°‡∏à‡∏£‡∏¥‡∏á"
             
             ' Add the signature line
             With ws.Cells(lastRow + 7, "C").Resize(1, 5)
                 .Merge
                 .HorizontalAlignment = xlCenter
                 If isLimitedPartnershipFlag Then
-                    .Value = "≈ß™◊ËÕ ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ.............................................. ÀÿÈπ Ë«πºŸÈ®—¥°“√"
+                    .Value = "‡∏•‡∏á‡∏ä‡∏∑‡πà‡∏≠ ‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶.............................................. ‡∏´‡∏∏‡πâ‡∏ô‡∏™‡πà‡∏ß‡∏ô‡∏ú‡∏π‡πâ‡∏à‡∏±‡∏î‡∏Å‡∏≤‡∏£"
                 Else
-                    .Value = "≈ß™◊ËÕ ÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖÖ.............................................. °√√¡°“√µ“¡Õ”π“®"
+                    .Value = "‡∏•‡∏á‡∏ä‡∏∑‡πà‡∏≠ ‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶.............................................. ‡∏Å‡∏£‡∏£‡∏°‡∏Å‡∏≤‡∏£‡∏ï‡∏≤‡∏°‡∏≠‡∏≥‡∏ô‡∏≤‡∏à"
                 End If
             End With
             
