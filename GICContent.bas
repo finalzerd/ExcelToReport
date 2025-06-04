@@ -1,4 +1,3 @@
-Attribute VB_Name = "GICContent"
 Option Explicit
 
 Private policyFilePath As String
@@ -68,7 +67,7 @@ Private Function AddGeneralInformation(ws As Worksheet, targetWorkbook As Workbo
     ' Add main title
     ws.Cells(currentRow, 1).Value = "1"
     ws.Cells(currentRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(currentRow, 2).Value = "�����ŷ����"
+    ws.Cells(currentRow, 2).Value = "ข้อมูลทั่วไป"
     ws.Cells(currentRow, 2).Font.Bold = True
     
     currentRow = currentRow + 1 ' Add spacing
@@ -94,15 +93,15 @@ Private Function AddGeneralInfoSections(ws As Worksheet, startRow As Long, entit
     currentRow = startRow
     
     ' Section 1.1
-    AddInfoSection ws, currentRow, "1.1", "ʶҹзҧ������", "�繹ԵԺؤ�ŨѴ��駵����������"
+    AddInfoSection ws, currentRow, "1.1", "สถานะทางกฎหมาย", "เป็นนิติบุคคลจัดตั้งตามกฎหมายไทย"
     currentRow = currentRow + 1
     
     ' Section 1.2
-    AddInfoSection ws, currentRow, "1.2", "ʶҹ�����", entityData("D2")
+    AddInfoSection ws, currentRow, "1.2", "สถานที่ตั้ง", entityData("D2")
     currentRow = currentRow + 1
     
     ' Section 1.3
-    AddInfoSection ws, currentRow, "1.3", "�ѡɳи�áԨ��С�ô��Թ�ҹ", entityData("E2")
+    AddInfoSection ws, currentRow, "1.3", "ลักษณะธุรกิจและการดำเนินงาน", entityData("E2")
     currentRow = currentRow + 1
     
     AddGeneralInfoSections = currentRow
@@ -132,13 +131,13 @@ Private Function AddCompanyStatus(ws As Worksheet, startRow As Long, entityData 
     
     ws.Cells(currentRow, 1).Value = "2"
     ws.Cells(currentRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(currentRow, 2).Value = "�ҹС�ô��Թ�ҹ�ͧ����ѷ"
+    ws.Cells(currentRow, 2).Value = "ฐานะการดำเนินงานของบริษัท"
     ws.Cells(currentRow, 2).Font.Bold = True
     
     currentRow = currentRow + 1
     
-    statusText = entityData("G2") & " �騴����¹��������š���������оҳԪ���繹ԵԺؤ�� ������ " & _
-                entityData("A2") & " ������ѹ��� " & entityData("B2") & " ����¹�Ţ��� " & entityData("H2")
+    statusText = entityData("G2") & " ได้จดทะเบียนตามประมวลกฎหมายแพ่งและพาณิชย์เป็นนิติบุคคล ประเภท " & _
+                entityData("A2") & " เมื่อวันที่ " & entityData("B2") & " ทะเบียนเลขที่ " & entityData("H2")
     
     With ws.Range(ws.Cells(currentRow, 3), ws.Cells(currentRow, 8))
         .Merge
@@ -181,7 +180,7 @@ Private Function AddBasisOfPreparation(targetWorkbook As Workbook, ws As Workshe
     ' Add the main title
     ws.Cells(currentRow, 1).Value = "3"
     ws.Cells(currentRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(currentRow, 2).Value = "ࡳ��㹡�èѴ����й��ʹͧ�����Թ"
+    ws.Cells(currentRow, 2).Value = "เกณฑ์ในการจัดทำและนำเสนองบการเงิน"
     ws.Cells(currentRow, 2).Font.Bold = True
     currentRow = currentRow + 1
     
@@ -259,7 +258,7 @@ Private Sub AddAccountingPolicy(targetWorkbook As Workbook, ws As Worksheet, sta
     ' Add main topic header
     ws.Cells(currentRow, 1).Value = "4"
     ws.Cells(currentRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(currentRow, 2).Value = "��ػ��º�¡�úѭ�շ���Ӥѭ"
+    ws.Cells(currentRow, 2).Value = "สรุปนโยบายการบัญชีที่สำคัญ"
     ws.Cells(currentRow, 2).Font.Bold = True
     ws.Rows(currentRow).AutoFit ' Autofit the main header
     currentRow = currentRow + 1
