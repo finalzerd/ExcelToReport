@@ -94,16 +94,16 @@ Sub CreateAssetBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
     AddBalanceSheetHeaderDetails ws, row
     row = row + 1
 
-    ' Add "ÊÔ¹·ÃÑ¾Âì"
+    ' Add "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œ"
     With ws.Cells(row, 2)
-        .Value = "ÊÔ¹·ÃÑ¾Âì"
+        .Value = "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œ"
         .Font.Bold = True
     End With
     row = row + 1
 
-    ' Add "ÊÔ¹·ÃÑ¾ÂìËÁØ¹àÇÕÂ¹" and year
+    ' Add "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™" and year
     With ws.Cells(row, 2)
-        .Value = "ÊÔ¹·ÃÑ¾ÂìËÁØ¹àÇÕÂ¹"
+        .Value = "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     With ws.Cells(row, 9)
@@ -120,14 +120,14 @@ Sub CreateAssetBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
     Set trialBalanceSheets = CreateTrialBalanceCollection(trialBalanceSheet)
 
     ' Add current assets
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à§Ô¹Ê´áÅÐÃÒÂ¡ÒÃà·ÕÂºà·èÒà§Ô¹Ê´", "1010", "1099", "", True, False, False, False)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "ÅÙ¡Ë¹Õé¡ÒÃ¤éÒáÅÐÅÙ¡Ë¹ÕéËÁØ¹àÇÕÂ¹Í×è¹", "1140", "1299", "1141", True, False, False, False)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à§Ô¹ãËé¡ÙéÂ×ÁÃÐÂÐÊÑé¹", "1141", "1141", "", True, True, False, True)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "ÊÔ¹¤éÒ¤§àËÅ×Í", "1510", "1530", "", True, False, False, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸‡à¸´à¸™à¸ªà¸”à¹à¸¥à¸°à¸£à¸²à¸¢à¸à¸²à¸£à¹€à¸—à¸µà¸¢à¸šà¹€à¸—à¹ˆà¸²à¹€à¸‡à¸´à¸™à¸ªà¸”", "1010", "1099", "", True, False, False, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¸¥à¸¹à¸à¸«à¸™à¸µà¹‰à¸à¸²à¸£à¸„à¹‰à¸²à¹à¸¥à¸°à¸¥à¸¹à¸à¸«à¸™à¸µà¹‰à¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™à¸­à¸·à¹ˆà¸™", "1140", "1299", "1141", True, False, False, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸‡à¸´à¸™à¹ƒà¸«à¹‰à¸à¸¹à¹‰à¸¢à¸·à¸¡à¸£à¸°à¸¢à¸°à¸ªà¸±à¹‰à¸™", "1141", "1141", "", True, True, False, True)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¸ªà¸´à¸™à¸„à¹‰à¸²à¸„à¸‡à¹€à¸«à¸¥à¸·à¸­", "1510", "1530", "", True, False, False, False)
 
     ' Add total current assets with formula
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁÊÔ¹·ÃÑ¾ÂìËÁØ¹àÇÕÂ¹"
+        .Value = "à¸£à¸§à¸¡à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     Dim currentAssetsRow As Long
@@ -139,9 +139,9 @@ Sub CreateAssetBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
     End With
     row = row + 1
 
-    ' Add "ÊÔ¹·ÃÑ¾ÂìäÁèËÁØ¹àÇÕÂ¹"
+    ' Add "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¹„à¸¡à¹ˆà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
     With ws.Cells(row, 2)
-        .Value = "ÊÔ¹·ÃÑ¾ÂìäÁèËÁØ¹àÇÕÂ¹"
+        .Value = "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¹„à¸¡à¹ˆà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     row = row + 1
@@ -150,12 +150,12 @@ Sub CreateAssetBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
     nonCurrentAssetsStartRow = row
 
     ' Add non-current assets
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "·Õè´Ô¹ ÍÒ¤ÒÃáÅÐÍØ»¡Ã³ì", "1600", "1659", "", True, False, False, False)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "ÊÔ¹·ÃÑ¾ÂìäÁèËÁØ¹àÇÕÂ¹Í×è¹", "1660", "1700", "", True, False, False, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¸—à¸µà¹ˆà¸”à¸´à¸™ à¸­à¸²à¸„à¸²à¸£à¹à¸¥à¸°à¸­à¸¸à¸›à¸à¸£à¸“à¹Œ", "1600", "1659", "", True, False, False, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¹„à¸¡à¹ˆà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™à¸­à¸·à¹ˆà¸™", "1660", "1700", "", True, False, False, False)
 
     ' Add total non-current assets with formula
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁÊÔ¹·ÃÑ¾ÂìäÁèËÁØ¹àÇÕÂ¹"
+        .Value = "à¸£à¸§à¸¡à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¹„à¸¡à¹ˆà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     Dim nonCurrentAssetsRow As Long
@@ -169,7 +169,7 @@ Sub CreateAssetBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
 
     ' Add total assets with formula
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁÊÔ¹·ÃÑ¾Âì"
+        .Value = "à¸£à¸§à¸¡à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œ"
         .Font.Bold = True
     End With
     With ws.Cells(row, 9)
@@ -197,15 +197,15 @@ Sub CreateLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
     Set targetWorkbook = ws.Parent
     
     ' Check if it's a limited partnership
-    isLimitedPartnership = (targetWorkbook.Sheets("Info").Range("B2").Value = "ËéÒ§ËØé¹ÊèÇ¹¨Ó¡Ñ´")
+    isLimitedPartnership = (targetWorkbook.Sheets("Info").Range("B2").Value = "à¸«à¹‰à¸²à¸‡à¸«à¸¸à¹‰à¸™à¸ªà¹ˆà¸§à¸™à¸ˆà¸³à¸à¸±à¸”")
     
     ' Set terms based on company type
     If isLimitedPartnership Then
-        liabilityAndEquityTerm = "Ë¹ÕéÊÔ¹áÅÐÊèÇ¹¢Í§¼Ùéà»ç¹ËØé¹ÊèÇ¹"
-        equityTerm = "ÊèÇ¹¢Í§¼Ùéà»ç¹ËØé¹ÊèÇ¹"
+        liabilityAndEquityTerm = "à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¹à¸¥à¸°à¸ªà¹ˆà¸§à¸™à¸‚à¸­à¸‡à¸œà¸¹à¹‰à¹€à¸›à¹‡à¸™à¸«à¸¸à¹‰à¸™à¸ªà¹ˆà¸§à¸™"
+        equityTerm = "à¸ªà¹ˆà¸§à¸™à¸‚à¸­à¸‡à¸œà¸¹à¹‰à¹€à¸›à¹‡à¸™à¸«à¸¸à¹‰à¸™à¸ªà¹ˆà¸§à¸™"
     Else
-        liabilityAndEquityTerm = "Ë¹ÕéÊÔ¹áÅÐÊèÇ¹¢Í§¼Ùé¶×ÍËØé¹"
-        equityTerm = "ÊèÇ¹¢Í§¼Ùé¶×ÍËØé¹"
+        liabilityAndEquityTerm = "à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¹à¸¥à¸°à¸ªà¹ˆà¸§à¸™à¸‚à¸­à¸‡à¸œà¸¹à¹‰à¸–à¸·à¸­à¸«à¸¸à¹‰à¸™"
+        equityTerm = "à¸ªà¹ˆà¸§à¸™à¸‚à¸­à¸‡à¸œà¸¹à¹‰à¸–à¸·à¸­à¸«à¸¸à¹‰à¸™"
     End If
     
     ' Initial setup
@@ -222,7 +222,7 @@ Sub CreateLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
     row = row + 1
 
     With ws.Cells(row, 2)
-        .Value = "Ë¹ÕéÊÔ¹ËÁØ¹àÇÕÂ¹"
+        .Value = "à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     row = row + 1
@@ -235,15 +235,15 @@ Sub CreateLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
     Set trialBalanceSheets = CreateTrialBalanceCollection(trialBalanceSheet)
 
     ' Add current liabilities
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à§Ô¹àºÔ¡à¡Ô¹ºÑ­ªÕáÅÐà§Ô¹¡ÙéÂ×ÁÃÐÂÐÊÑé¹¨Ò¡Ê¶ÒºÑ¹¡ÒÃà§Ô¹", "2001", "2009", "", True, False, False, False)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¨éÒË¹Õé¡ÒÃ¤éÒáÅÐà¨éÒË¹ÕéËÁØ¹àÇÕÂ¹Í×è¹", "2010", "2999", "2030,2045,2050,2051,2052,2100,2120,2121,2122,2123", True, False, False, False)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "ÊèÇ¹¢Í§Ë¹ÕéÊÔ¹ÃÐÂÐÂÒÇ·Õè¶Ö§¡ÓË¹´ªÓÃÐÀÒÂã¹Ë¹Öè§»Õ", "0", "0", "", True, True, False, True)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à§Ô¹¡ÙéÂ×ÁÃÐÂÐÊÑé¹", "2030", "2030", "", True, True, False, True)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "ÀÒÉÕà§Ô¹ä´é¹ÔµÔºØ¤¤Å¤éÒ§¨èÒÂ", "2045", "2045", "", True, True, False, True)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸‡à¸´à¸™à¹€à¸šà¸´à¸à¹€à¸à¸´à¸™à¸šà¸±à¸à¸Šà¸µà¹à¸¥à¸°à¹€à¸‡à¸´à¸™à¸à¸¹à¹‰à¸¢à¸·à¸¡à¸£à¸°à¸¢à¸°à¸ªà¸±à¹‰à¸™à¸ˆà¸²à¸à¸ªà¸–à¸²à¸šà¸±à¸™à¸à¸²à¸£à¹€à¸‡à¸´à¸™", "2001", "2009", "", True, False, False, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸ˆà¹‰à¸²à¸«à¸™à¸µà¹‰à¸à¸²à¸£à¸„à¹‰à¸²à¹à¸¥à¸°à¹€à¸ˆà¹‰à¸²à¸«à¸™à¸µà¹‰à¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™à¸­à¸·à¹ˆà¸™", "2010", "2999", "2030,2045,2050,2051,2052,2100,2120,2121,2122,2123", True, False, False, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¸ªà¹ˆà¸§à¸™à¸‚à¸­à¸‡à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¸£à¸°à¸¢à¸°à¸¢à¸²à¸§à¸—à¸µà¹ˆà¸–à¸¶à¸‡à¸à¸³à¸«à¸™à¸”à¸Šà¸³à¸£à¸°à¸ à¸²à¸¢à¹ƒà¸™à¸«à¸™à¸¶à¹ˆà¸‡à¸›à¸µ", "0", "0", "", True, True, False, True)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸‡à¸´à¸™à¸à¸¹à¹‰à¸¢à¸·à¸¡à¸£à¸°à¸¢à¸°à¸ªà¸±à¹‰à¸™", "2030", "2030", "", True, True, False, True)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¸ à¸²à¸©à¸µà¹€à¸‡à¸´à¸™à¹„à¸”à¹‰à¸™à¸´à¸•à¸´à¸šà¸¸à¸„à¸„à¸¥à¸„à¹‰à¸²à¸‡à¸ˆà¹ˆà¸²à¸¢", "2045", "2045", "", True, True, False, True)
 
     ' Add total current liabilities with formula
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁË¹ÕéÊÔ¹ËÁØ¹àÇÕÂ¹"
+        .Value = "à¸£à¸§à¸¡à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     Dim currentLiabilitiesRow As Long
@@ -257,7 +257,7 @@ Sub CreateLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
 
     ' Add non-current liabilities header
     With ws.Cells(row, 2)
-        .Value = "Ë¹ÕéÊÔ¹äÁèËÁØ¹àÇÕÂ¹"
+        .Value = "à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¹„à¸¡à¹ˆà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     row = row + 1
@@ -266,17 +266,17 @@ Sub CreateLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
     nonCurrentLiabilitiesStartRow = row
 
     ' Add non-current liabilities
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à§Ô¹¡ÙéÂ×ÁÃÐÂÐÂÒÇ¨Ò¡Ê¶ÒºÑ¹¡ÒÃà§Ô¹", "2120", "2123", "2121", True, False, False, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸‡à¸´à¸™à¸à¸¹à¹‰à¸¢à¸·à¸¡à¸£à¸°à¸¢à¸°à¸¢à¸²à¸§à¸ˆà¸²à¸à¸ªà¸–à¸²à¸šà¸±à¸™à¸à¸²à¸£à¹€à¸‡à¸´à¸™", "2120", "2123", "2121", True, False, False, False)
     ' Subtract current portion
     With ws.Cells(row - 1, 9)
         .Value = .Value - gLoanCurrentPortion.CurrentYear
     End With
     
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à§Ô¹¡ÙéÂ×ÁÃÐÂÐÂÒÇ", "2050", "2052", "", True, False, True, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸‡à¸´à¸™à¸à¸¹à¹‰à¸¢à¸·à¸¡à¸£à¸°à¸¢à¸°à¸¢à¸²à¸§", "2050", "2052", "", True, False, True, False)
 
     ' Add total non-current liabilities with formula
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁË¹ÕéÊÔ¹äÁèËÁØ¹àÇÕÂ¹"
+        .Value = "à¸£à¸§à¸¡à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¹„à¸¡à¹ˆà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     Dim nonCurrentLiabilitiesRow As Long
@@ -290,7 +290,7 @@ Sub CreateLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
 
     ' Add total liabilities with formula
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁË¹ÕéÊÔ¹"
+        .Value = "à¸£à¸§à¸¡à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™"
         .Font.Bold = True
     End With
     With ws.Cells(row, 9)
@@ -321,7 +321,7 @@ Sub CreateLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
         Next equityItem
     Else
         ' Add registered capital section
-        ws.Cells(row, 3).Value = "·Ø¹¨´·ÐàºÕÂ¹"
+        ws.Cells(row, 3).Value = "à¸—à¸¸à¸™à¸ˆà¸”à¸—à¸°à¹€à¸šà¸µà¸¢à¸™"
         row = row + 1
         
         Dim shares As Long
@@ -329,7 +329,7 @@ Sub CreateLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
         shares = CLng(targetWorkbook.Sheets("Info").Range("B6").Value)
         shareValue = CDbl(targetWorkbook.Sheets("Info").Range("B7").Value)
         
-        ws.Cells(row, 4).Value = "ËØé¹ÊÒÁÑ­ " & Format(shares, "#,##0") & " ËØé¹ ÁÙÅ¤èÒËØé¹ÅÐ " & Format(shareValue, "#,##0.00") & " ºÒ·"
+        ws.Cells(row, 4).Value = "à¸«à¸¸à¹‰à¸™à¸ªà¸²à¸¡à¸±à¸ " & Format(shares, "#,##0") & " à¸«à¸¸à¹‰à¸™ à¸¡à¸¹à¸¥à¸„à¹ˆà¸²à¸«à¸¸à¹‰à¸™à¸¥à¸° " & Format(shareValue, "#,##0.00") & " à¸šà¸²à¸—"
         ws.Cells(row, 9).Value = shares * shareValue
         With ws.Cells(row, 9)
             .Borders(xlEdgeBottom).LineStyle = xlDouble
@@ -337,9 +337,9 @@ Sub CreateLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
         row = row + 1
         
         ' Add paid-up capital section
-        ws.Cells(row, 3).Value = "·Ø¹·ÕèÍÍ¡áÅÐªÓÃÐáÅéÇ"
+        ws.Cells(row, 3).Value = "à¸—à¸¸à¸™à¸—à¸µà¹ˆà¸­à¸­à¸à¹à¸¥à¸°à¸Šà¸³à¸£à¸°à¹à¸¥à¹‰à¸§"
         row = row + 1
-        ws.Cells(row, 4).Value = "ËØé¹ÊÒÁÑ­ " & Format(shares, "#,##0") & " ËØé¹ ÁÙÅ¤èÒËØé¹ÅÐ " & Format(shareValue, "#,##0.00") & " ºÒ·"
+        ws.Cells(row, 4).Value = "à¸«à¸¸à¹‰à¸™à¸ªà¸²à¸¡à¸±à¸ " & Format(shares, "#,##0") & " à¸«à¸¸à¹‰à¸™ à¸¡à¸¹à¸¥à¸„à¹ˆà¸²à¸«à¸¸à¹‰à¸™à¸¥à¸° " & Format(shareValue, "#,##0.00") & " à¸šà¸²à¸—"
         ' Store the row where paid-up capital starts for equity calculation
         
         paidUpCapitalStartRow = row
@@ -350,7 +350,7 @@ Sub CreateLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
 
     ' Add total equity with formula
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁ" & equityTerm
+        .Value = "à¸£à¸§à¸¡" & equityTerm
         .Font.Bold = True
     End With
     Dim equityTotalRow As Long
@@ -364,7 +364,7 @@ Sub CreateLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheet As Worksheet)
 
     ' Add total liabilities and equity with formula
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁ" & liabilityAndEquityTerm
+        .Value = "à¸£à¸§à¸¡" & liabilityAndEquityTerm
         .Font.Bold = True
     End With
     With ws.Cells(row, 9)
@@ -404,16 +404,16 @@ Sub CreateMultiPeriodAssetBalanceSheet(ws As Worksheet, trialBalanceSheets As Co
     AddBalanceSheetHeaderDetails ws, row
     row = row + 1
 
-    ' Add "ÊÔ¹·ÃÑ¾Âì"
+    ' Add "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œ"
     With ws.Cells(row, 2)
-        .Value = "ÊÔ¹·ÃÑ¾Âì"
+        .Value = "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œ"
         .Font.Bold = True
     End With
     row = row + 1
 
     ' Add headers and years
     With ws.Cells(row, 2)
-        .Value = "ÊÔ¹·ÃÑ¾ÂìËÁØ¹àÇÕÂ¹"
+        .Value = "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     With ws.Cells(row, 7)
@@ -430,14 +430,14 @@ Sub CreateMultiPeriodAssetBalanceSheet(ws As Worksheet, trialBalanceSheets As Co
     currentAssetsStartRow = row
 
     ' Add current assets
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à§Ô¹Ê´áÅÐÃÒÂ¡ÒÃà·ÕÂºà·èÒà§Ô¹Ê´", "1010", "1099", "", True, False, True, False)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "ÅÙ¡Ë¹Õé¡ÒÃ¤éÒáÅÐÅÙ¡Ë¹ÕéËÁØ¹àÇÕÂ¹Í×è¹", "1140", "1299", "1141", True, False, True, False)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à§Ô¹ãËé¡ÙéÂ×ÁÃÐÂÐÊÑé¹", "1141", "1141", "", True, True, True, True)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "ÊÔ¹¤éÒ¤§àËÅ×Í", "1510", "1530", "", True, False, True, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸‡à¸´à¸™à¸ªà¸”à¹à¸¥à¸°à¸£à¸²à¸¢à¸à¸²à¸£à¹€à¸—à¸µà¸¢à¸šà¹€à¸—à¹ˆà¸²à¹€à¸‡à¸´à¸™à¸ªà¸”", "1010", "1099", "", True, False, True, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¸¥à¸¹à¸à¸«à¸™à¸µà¹‰à¸à¸²à¸£à¸„à¹‰à¸²à¹à¸¥à¸°à¸¥à¸¹à¸à¸«à¸™à¸µà¹‰à¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™à¸­à¸·à¹ˆà¸™", "1140", "1299", "1141", True, False, True, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸‡à¸´à¸™à¹ƒà¸«à¹‰à¸à¸¹à¹‰à¸¢à¸·à¸¡à¸£à¸°à¸¢à¸°à¸ªà¸±à¹‰à¸™", "1141", "1141", "", True, True, True, True)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¸ªà¸´à¸™à¸„à¹‰à¸²à¸„à¸‡à¹€à¸«à¸¥à¸·à¸­", "1510", "1530", "", True, False, True, False)
 
     ' Add total current assets with formulas
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁÊÔ¹·ÃÑ¾ÂìËÁØ¹àÇÕÂ¹"
+        .Value = "à¸£à¸§à¸¡à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     Dim currentAssetsRow As Long
@@ -454,9 +454,9 @@ Sub CreateMultiPeriodAssetBalanceSheet(ws As Worksheet, trialBalanceSheets As Co
     End With
     row = row + 1
 
-    ' Add "ÊÔ¹·ÃÑ¾ÂìäÁèËÁØ¹àÇÕÂ¹"
+    ' Add "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¹„à¸¡à¹ˆà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
     With ws.Cells(row, 2)
-        .Value = "ÊÔ¹·ÃÑ¾ÂìäÁèËÁØ¹àÇÕÂ¹"
+        .Value = "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¹„à¸¡à¹ˆà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     row = row + 1
@@ -465,12 +465,12 @@ Sub CreateMultiPeriodAssetBalanceSheet(ws As Worksheet, trialBalanceSheets As Co
     nonCurrentAssetsStartRow = row
 
     ' Add non-current assets
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "·Õè´Ô¹ ÍÒ¤ÒÃáÅÐÍØ»¡Ã³ì", "1600", "1659", "", True, False, True, False)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "ÊÔ¹·ÃÑ¾ÂìäÁèËÁØ¹àÇÕÂ¹Í×è¹", "1660", "1700", "", True, False, True, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¸—à¸µà¹ˆà¸”à¸´à¸™ à¸­à¸²à¸„à¸²à¸£à¹à¸¥à¸°à¸­à¸¸à¸›à¸à¸£à¸“à¹Œ", "1600", "1659", "", True, False, True, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¹„à¸¡à¹ˆà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™à¸­à¸·à¹ˆà¸™", "1660", "1700", "", True, False, True, False)
 
     ' Add total non-current assets with formulas
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁÊÔ¹·ÃÑ¾ÂìäÁèËÁØ¹àÇÕÂ¹"
+        .Value = "à¸£à¸§à¸¡à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œà¹„à¸¡à¹ˆà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     Dim nonCurrentAssetsRow As Long
@@ -489,7 +489,7 @@ Sub CreateMultiPeriodAssetBalanceSheet(ws As Worksheet, trialBalanceSheets As Co
 
     ' Add total assets with formulas
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁÊÔ¹·ÃÑ¾Âì"
+        .Value = "à¸£à¸§à¸¡à¸ªà¸´à¸™à¸—à¸£à¸±à¸žà¸¢à¹Œ"
         .Font.Bold = True
     End With
     With ws.Cells(row, 7)
@@ -533,15 +533,15 @@ Sub CreateMultiPeriodLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheets A
     End If
     
     ' Check if it's a limited partnership
-    isLimitedPartnership = (targetWorkbook.Sheets("Info").Range("B2").Value = "ËéÒ§ËØé¹ÊèÇ¹¨Ó¡Ñ´")
+    isLimitedPartnership = (targetWorkbook.Sheets("Info").Range("B2").Value = "à¸«à¹‰à¸²à¸‡à¸«à¸¸à¹‰à¸™à¸ªà¹ˆà¸§à¸™à¸ˆà¸³à¸à¸±à¸”")
     
     ' Set terms based on company type
     If isLimitedPartnership Then
-        liabilityAndEquityTerm = "Ë¹ÕéÊÔ¹áÅÐÊèÇ¹¢Í§¼Ùéà»ç¹ËØé¹ÊèÇ¹"
-        equityTerm = "ÊèÇ¹¢Í§¼Ùéà»ç¹ËØé¹ÊèÇ¹"
+        liabilityAndEquityTerm = "à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¹à¸¥à¸°à¸ªà¹ˆà¸§à¸™à¸‚à¸­à¸‡à¸œà¸¹à¹‰à¹€à¸›à¹‡à¸™à¸«à¸¸à¹‰à¸™à¸ªà¹ˆà¸§à¸™"
+        equityTerm = "à¸ªà¹ˆà¸§à¸™à¸‚à¸­à¸‡à¸œà¸¹à¹‰à¹€à¸›à¹‡à¸™à¸«à¸¸à¹‰à¸™à¸ªà¹ˆà¸§à¸™"
     Else
-        liabilityAndEquityTerm = "Ë¹ÕéÊÔ¹áÅÐÊèÇ¹¢Í§¼Ùé¶×ÍËØé¹"
-        equityTerm = "ÊèÇ¹¢Í§¼Ùé¶×ÍËØé¹"
+        liabilityAndEquityTerm = "à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¹à¸¥à¸°à¸ªà¹ˆà¸§à¸™à¸‚à¸­à¸‡à¸œà¸¹à¹‰à¸–à¸·à¸­à¸«à¸¸à¹‰à¸™"
+        equityTerm = "à¸ªà¹ˆà¸§à¸™à¸‚à¸­à¸‡à¸œà¸¹à¹‰à¸–à¸·à¸­à¸«à¸¸à¹‰à¸™"
     End If
     
     ' Initial setup
@@ -558,7 +558,7 @@ Sub CreateMultiPeriodLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheets A
     row = row + 1
 
     With ws.Cells(row, 2)
-        .Value = "Ë¹ÕéÊÔ¹ËÁØ¹àÇÕÂ¹"
+        .Value = "à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     With ws.Cells(row, 7)
@@ -575,15 +575,15 @@ Sub CreateMultiPeriodLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheets A
     currentLiabilitiesStartRow = row
 
     ' Add current liabilities
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à§Ô¹àºÔ¡à¡Ô¹ºÑ­ªÕáÅÐà§Ô¹¡ÙéÂ×ÁÃÐÂÐÊÑé¹¨Ò¡Ê¶ÒºÑ¹¡ÒÃà§Ô¹", "2001", "2009", "", True, False, True, False)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¨éÒË¹Õé¡ÒÃ¤éÒáÅÐà¨éÒË¹ÕéËÁØ¹àÇÕÂ¹Í×è¹", "2010", "2999", "2030,2045,2050,2051,2052,2100,2120,2121,2122,2123", True, False, True, False)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "ÊèÇ¹¢Í§Ë¹ÕéÊÔ¹ÃÐÂÐÂÒÇ·Õè¶Ö§¡ÓË¹´ªÓÃÐÀÒÂã¹Ë¹Öè§»Õ", "0", "0", "", True, True, True, True)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à§Ô¹¡ÙéÂ×ÁÃÐÂÐÊÑé¹", "2030", "2030", "", True, True, True, True)
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "ÀÒÉÕà§Ô¹ä´é¹ÔµÔºØ¤¤Å¤éÒ§¨èÒÂ", "2045", "2045", "", True, True, True, True)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸‡à¸´à¸™à¹€à¸šà¸´à¸à¹€à¸à¸´à¸™à¸šà¸±à¸à¸Šà¸µà¹à¸¥à¸°à¹€à¸‡à¸´à¸™à¸à¸¹à¹‰à¸¢à¸·à¸¡à¸£à¸°à¸¢à¸°à¸ªà¸±à¹‰à¸™à¸ˆà¸²à¸à¸ªà¸–à¸²à¸šà¸±à¸™à¸à¸²à¸£à¹€à¸‡à¸´à¸™", "2001", "2009", "", True, False, True, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸ˆà¹‰à¸²à¸«à¸™à¸µà¹‰à¸à¸²à¸£à¸„à¹‰à¸²à¹à¸¥à¸°à¹€à¸ˆà¹‰à¸²à¸«à¸™à¸µà¹‰à¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™à¸­à¸·à¹ˆà¸™", "2010", "2999", "2030,2045,2050,2051,2052,2100,2120,2121,2122,2123", True, False, True, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¸ªà¹ˆà¸§à¸™à¸‚à¸­à¸‡à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¸£à¸°à¸¢à¸°à¸¢à¸²à¸§à¸—à¸µà¹ˆà¸–à¸¶à¸‡à¸à¸³à¸«à¸™à¸”à¸Šà¸³à¸£à¸°à¸ à¸²à¸¢à¹ƒà¸™à¸«à¸™à¸¶à¹ˆà¸‡à¸›à¸µ", "0", "0", "", True, True, True, True)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸‡à¸´à¸™à¸à¸¹à¹‰à¸¢à¸·à¸¡à¸£à¸°à¸¢à¸°à¸ªà¸±à¹‰à¸™", "2030", "2030", "", True, True, True, True)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¸ à¸²à¸©à¸µà¹€à¸‡à¸´à¸™à¹„à¸”à¹‰à¸™à¸´à¸•à¸´à¸šà¸¸à¸„à¸„à¸¥à¸„à¹‰à¸²à¸‡à¸ˆà¹ˆà¸²à¸¢", "2045", "2045", "", True, True, True, True)
 
     ' Add total current liabilities with formulas
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁË¹ÕéÊÔ¹ËÁØ¹àÇÕÂ¹"
+        .Value = "à¸£à¸§à¸¡à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     Dim currentLiabilitiesRow As Long
@@ -602,7 +602,7 @@ Sub CreateMultiPeriodLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheets A
 
     ' Add non-current liabilities header
     With ws.Cells(row, 2)
-        .Value = "Ë¹ÕéÊÔ¹äÁèËÁØ¹àÇÕÂ¹"
+        .Value = "à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¹„à¸¡à¹ˆà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     row = row + 1
@@ -611,7 +611,7 @@ Sub CreateMultiPeriodLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheets A
     nonCurrentLiabilitiesStartRow = row
 
     ' Add non-current liabilities
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à§Ô¹¡ÙéÂ×ÁÃÐÂÐÂÒÇ¨Ò¡Ê¶ÒºÑ¹¡ÒÃà§Ô¹", "2120", "2123", "2121", True, False, True, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸‡à¸´à¸™à¸à¸¹à¹‰à¸¢à¸·à¸¡à¸£à¸°à¸¢à¸°à¸¢à¸²à¸§à¸ˆà¸²à¸à¸ªà¸–à¸²à¸šà¸±à¸™à¸à¸²à¸£à¹€à¸‡à¸´à¸™", "2120", "2123", "2121", True, False, True, False)
     ' Subtract current portion
     With ws.Cells(row - 1, 7)
         .Value = .Value - gLoanCurrentPortion.CurrentYear
@@ -620,11 +620,11 @@ Sub CreateMultiPeriodLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheets A
         .Value = .Value - gLoanCurrentPortion.PreviousYear
     End With
     
-    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à§Ô¹¡ÙéÂ×ÁÃÐÂÐÂÒÇ", "2050", "2052", "", True, False, True, False)
+    tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "à¹€à¸‡à¸´à¸™à¸à¸¹à¹‰à¸¢à¸·à¸¡à¸£à¸°à¸¢à¸°à¸¢à¸²à¸§", "2050", "2052", "", True, False, True, False)
 
     ' Add total non-current liabilities with formulas
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁË¹ÕéÊÔ¹äÁèËÁØ¹àÇÕÂ¹"
+        .Value = "à¸£à¸§à¸¡à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¹„à¸¡à¹ˆà¸«à¸¡à¸¸à¸™à¹€à¸§à¸µà¸¢à¸™"
         .Font.Bold = True
     End With
     Dim nonCurrentLiabilitiesRow As Long
@@ -643,7 +643,7 @@ Sub CreateMultiPeriodLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheets A
 
     ' Add total liabilities with formulas
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁË¹ÕéÊÔ¹"
+        .Value = "à¸£à¸§à¸¡à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™"
         .Font.Bold = True
     End With
     Dim totalLiabilitiesRow As Long
@@ -687,7 +687,7 @@ Sub CreateMultiPeriodLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheets A
         Next equityItem
     Else
         ' Add registered capital section
-        ws.Cells(row, 3).Value = "·Ø¹¨´·ÐàºÕÂ¹"
+        ws.Cells(row, 3).Value = "à¸—à¸¸à¸™à¸ˆà¸”à¸—à¸°à¹€à¸šà¸µà¸¢à¸™"
         row = row + 1
         
         Dim shares As Long
@@ -695,7 +695,7 @@ Sub CreateMultiPeriodLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheets A
         shares = CLng(targetWorkbook.Sheets("Info").Range("B6").Value)
         shareValue = CDbl(targetWorkbook.Sheets("Info").Range("B7").Value)
         
-        ws.Cells(row, 4).Value = "ËØé¹ÊÒÁÑ­ " & Format(shares, "#,##0") & " ËØé¹ ÁÙÅ¤èÒËØé¹ÅÐ " & Format(shareValue, "#,##0.00") & " ºÒ·"
+        ws.Cells(row, 4).Value = "à¸«à¸¸à¹‰à¸™à¸ªà¸²à¸¡à¸±à¸ " & Format(shares, "#,##0") & " à¸«à¸¸à¹‰à¸™ à¸¡à¸¹à¸¥à¸„à¹ˆà¸²à¸«à¸¸à¹‰à¸™à¸¥à¸° " & Format(shareValue, "#,##0.00") & " à¸šà¸²à¸—"
         ws.Cells(row, 7).Value = shares * shareValue
         ws.Cells(row, 9).Value = shares * shareValue
         With ws.Cells(row, 7)
@@ -707,9 +707,9 @@ Sub CreateMultiPeriodLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheets A
         row = row + 1
         
         ' Add paid-up capital section
-        ws.Cells(row, 3).Value = "·Ø¹·ÕèÍÍ¡áÅÐªÓÃÐáÅéÇ"
+        ws.Cells(row, 3).Value = "à¸—à¸¸à¸™à¸—à¸µà¹ˆà¸­à¸­à¸à¹à¸¥à¸°à¸Šà¸³à¸£à¸°à¹à¸¥à¹‰à¸§"
         row = row + 1
-        ws.Cells(row, 4).Value = "ËØé¹ÊÒÁÑ­ " & Format(shares, "#,##0") & " ËØé¹ ÁÙÅ¤èÒËØé¹ÅÐ " & Format(shareValue, "#,##0.00") & " ºÒ·"
+        ws.Cells(row, 4).Value = "à¸«à¸¸à¹‰à¸™à¸ªà¸²à¸¡à¸±à¸ " & Format(shares, "#,##0") & " à¸«à¸¸à¹‰à¸™ à¸¡à¸¹à¸¥à¸„à¹ˆà¸²à¸«à¸¸à¹‰à¸™à¸¥à¸° " & Format(shareValue, "#,##0.00") & " à¸šà¸²à¸—"
         paidUpCapitalStartRow = row
         tempResults = AddAccountGroup(ws, trialBalanceSheets, row, "", "3010", "3019", "", False, True, True, False)
     End If
@@ -718,7 +718,7 @@ Sub CreateMultiPeriodLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheets A
 
     ' Add total equity with formulas
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁ" & equityTerm
+        .Value = "à¸£à¸§à¸¡" & equityTerm
         .Font.Bold = True
     End With
     Dim equityTotalRow As Long
@@ -739,7 +739,7 @@ Sub CreateMultiPeriodLiabilityBalanceSheet(ws As Worksheet, trialBalanceSheets A
 
     ' Add total liabilities and equity with formulas
     With ws.Cells(row, 2)
-        .Value = "ÃÇÁ" & liabilityAndEquityTerm
+        .Value = "à¸£à¸§à¸¡" & liabilityAndEquityTerm
         .Font.Bold = True
     End With
     With ws.Cells(row, 7)
@@ -766,7 +766,7 @@ Function AddAccountGroup(ws As Worksheet, trialBalanceSheets As Collection, ByRe
     Dim foundMatch As Boolean
     
     ' Special handling for current portion of long-term loans
-    If groupName = "ÊèÇ¹¢Í§Ë¹ÕéÊÔ¹ÃÐÂÐÂÒÇ·Õè¶Ö§¡ÓË¹´ªÓÃÐÀÒÂã¹Ë¹Öè§»Õ" Then
+    If groupName = "à¸ªà¹ˆà¸§à¸™à¸‚à¸­à¸‡à¸«à¸™à¸µà¹‰à¸ªà¸´à¸™à¸£à¸°à¸¢à¸°à¸¢à¸²à¸§à¸—à¸µà¹ˆà¸–à¸¶à¸‡à¸à¸³à¸«à¸™à¸”à¸Šà¸³à¸£à¸°à¸ à¸²à¸¢à¹ƒà¸™à¸«à¸™à¸¶à¹ˆà¸‡à¸›à¸µ" Then
         ws.Cells(row, 3).Value = groupName
         If isMultiPeriod Then
             ws.Cells(row, 7).Value = gLoanCurrentPortion.CurrentYear
@@ -883,13 +883,13 @@ End Sub
 
 Sub AddBalanceSheetHeaderDetails(ws As Worksheet, row As Long)
     With ws.Cells(row, 6)
-        .Value = "ËÁÒÂàËµØ"
+        .Value = "à¸«à¸¡à¸²à¸¢à¹€à¸«à¸•à¸¸"
         .Font.Bold = True
         .Font.Underline = xlUnderlineStyleSingle
     End With
     
     With ws.Cells(row, 9)
-        .Value = "Ë¹èÇÂ:ºÒ·"
+        .Value = "à¸«à¸™à¹ˆà¸§à¸¢:à¸šà¸²à¸—"
         .Font.Bold = True
         .Font.Underline = xlUnderlineStyleSingle
         .HorizontalAlignment = xlRight
@@ -899,13 +899,13 @@ End Sub
 Function isLimitedPartnership(targetWorkbook As Workbook) As Boolean
     Dim infoSheet As Worksheet
     Set infoSheet = targetWorkbook.Sheets("Info")
-    isLimitedPartnership = (infoSheet.Range("B2").Value = "ËéÒ§ËØé¹ÊèÇ¹¨Ó¡Ñ´")
+    isLimitedPartnership = (infoSheet.Range("B2").Value = "à¸«à¹‰à¸²à¸‡à¸«à¸¸à¹‰à¸™à¸ªà¹ˆà¸§à¸™à¸ˆà¸³à¸à¸±à¸”")
 End Function
 Function GetRetainedEarningsText(targetWorkbook As Workbook) As String
     If isLimitedPartnership(targetWorkbook) Then
-        GetRetainedEarningsText = "¡ÓäÃ ( ¢Ò´·Ø¹ ) ÊÐÊÁÂÑ§äÁèä´éáºè§"
+        GetRetainedEarningsText = "à¸à¸³à¹„à¸£ ( à¸‚à¸²à¸”à¸—à¸¸à¸™ ) à¸ªà¸°à¸ªà¸¡à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹„à¸”à¹‰à¹à¸šà¹ˆà¸‡"
     Else
-        GetRetainedEarningsText = "¡ÓäÃ ( ¢Ò´·Ø¹ ) ÊÐÊÁÂÑ§äÁèä´é¨Ñ´ÊÃÃ"
+        GetRetainedEarningsText = "à¸à¸³à¹„à¸£ ( à¸‚à¸²à¸”à¸—à¸¸à¸™ ) à¸ªà¸°à¸ªà¸¡à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹„à¸”à¹‰à¸ˆà¸±à¸”à¸ªà¸£à¸£"
     End If
 End Function
 
@@ -948,7 +948,7 @@ Function GetPartnersEquity(targetWorkbook As Workbook) As Collection
         ' Check if we have enough columns for the account name
         If UBound(parts) >= 8 Then
             accountName = Trim(parts(8))
-            If accountName <> "" And Left(accountName, 5) <> "Å§·Ø¹" Then
+            If accountName <> "" And Left(accountName, 5) <> "à¸¥à¸‡à¸—à¸¸à¸™" Then
                 ' Read the next line for the amount
                 If Not ts.AtEndOfStream Then
                     line = ts.ReadLine
