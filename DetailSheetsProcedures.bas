@@ -1,4 +1,3 @@
-Attribute VB_Name = "DetailSheetsProcedures"
 Option Explicit
 
 Sub CreateDetailOne(targetWorkbook As Workbook)
@@ -12,9 +11,9 @@ Sub CreateDetailOne(targetWorkbook As Workbook)
     lastRowPL = trialPLSheet.Cells(trialPLSheet.Rows.Count, 1).End(xlUp).row
     
     ' Add header details
-    detailWorksheet.Range("A4").Value = "ÃÒÂÅÐàÍÕÂ´»ÃÐ¡Íº·Õè 1"
+    detailWorksheet.Range("A4").Value = "à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸›à¸£à¸°à¸à¸­à¸šà¸—à¸µà¹ˆ 1"
     detailWorksheet.Range("A4").Font.Bold = True
-    detailWorksheet.Range("I4").Value = "Ë¹èÇÂ : ºÒ·"
+    detailWorksheet.Range("I4").Value = "à¸«à¸™à¹ˆà¸§à¸¢ : à¸šà¸²à¸—"
     
     row = 5 ' Start row for details
     
@@ -87,7 +86,7 @@ Function ProcessInventory(ws As Worksheet, trialPLSheet As Worksheet, startRow A
     
     row = startRow
     
-    ws.Cells(row, 2).Value = "µé¹·Ø¹ÊÔ¹¤éÒ·Õè¢ÒÂ"
+    ws.Cells(row, 2).Value = "à¸•à¹‰à¸™à¸—à¸¸à¸™à¸ªà¸´à¸™à¸„à¹‰à¸²à¸—à¸µà¹ˆà¸‚à¸²à¸¢"
     ws.Cells(row, 2).Font.Bold = True
     row = row + 1
     
@@ -100,8 +99,8 @@ Function ProcessInventory(ws As Worksheet, trialPLSheet As Worksheet, startRow A
     totalPurchases = ProcessPurchases(ws, trialPLSheet, row)
     inventoryForSale = inventoryForSale + totalPurchases
     
-    ' Add "ÊÔ¹¤éÒÁÕäÇéà¾×èÍ¢ÒÂ"
-    ws.Cells(row, 2).Value = "ÊÔ¹¤éÒÁÕäÇéà¾×èÍ¢ÒÂ"
+    ' Add "à¸ªà¸´à¸™à¸„à¹‰à¸²à¸¡à¸µà¹„à¸§à¹‰à¹€à¸žà¸·à¹ˆà¸­à¸‚à¸²à¸¢"
+    ws.Cells(row, 2).Value = "à¸ªà¸´à¸™à¸„à¹‰à¸²à¸¡à¸µà¹„à¸§à¹‰à¹€à¸žà¸·à¹ˆà¸­à¸‚à¸²à¸¢"
     ws.Cells(row, 9).Value = inventoryForSale
     row = row + 1
     
@@ -109,9 +108,9 @@ Function ProcessInventory(ws As Worksheet, trialPLSheet As Worksheet, startRow A
     endingInventory = AddEndingInventory(ws, trialPLSheet, row)
     row = row + 1
     
-    ' Calculate and add "µé¹·Ø¹ÊÔ¹¤éÒ·Õè¢ÒÂ"
+    ' Calculate and add "à¸•à¹‰à¸™à¸—à¸¸à¸™à¸ªà¸´à¸™à¸„à¹‰à¸²à¸—à¸µà¹ˆà¸‚à¸²à¸¢"
     costOfGoodsSold = inventoryForSale - endingInventory
-    ws.Cells(row, 2).Value = "µé¹·Ø¹ÊÔ¹¤éÒ·Õè¢ÒÂ"
+    ws.Cells(row, 2).Value = "à¸•à¹‰à¸™à¸—à¸¸à¸™à¸ªà¸´à¸™à¸„à¹‰à¸²à¸—à¸µà¹ˆà¸‚à¸²à¸¢"
     ws.Cells(row, 9).Value = costOfGoodsSold
     ws.Cells(row, 2).Font.Bold = True
     row = row + 1
@@ -126,7 +125,7 @@ Function AddBeginningInventory(ws As Worksheet, trialPLSheet As Worksheet, row A
     
     lastRow = trialPLSheet.Cells(trialPLSheet.Rows.Count, 1).End(xlUp).row
     
-    ws.Cells(row, 2).Value = "ÊÔ¹¤éÒ¤§àËÅ×Íµé¹§Ç´"
+    ws.Cells(row, 2).Value = "à¸ªà¸´à¸™à¸„à¹‰à¸²à¸„à¸‡à¹€à¸«à¸¥à¸·à¸­à¸•à¹‰à¸™à¸‡à¸§à¸”"
     For i = 2 To lastRow
         If trialPLSheet.Cells(i, 2).Value = "1510" Then
             amount = trialPLSheet.Cells(i, 6).Value
@@ -150,8 +149,8 @@ Function ProcessPurchases(ws As Worksheet, trialPLSheet As Worksheet, ByRef row 
     For i = 2 To lastRow
         If trialPLSheet.Cells(i, 2).Value = "5010" Then
             amount = trialPLSheet.Cells(i, 5).Value
-            ws.Cells(row, 2).Value = "ºÇ¡"
-            ws.Cells(row, 3).Value = "«×éÍÊÔ¹¤éÒ"
+            ws.Cells(row, 2).Value = "à¸šà¸§à¸"
+            ws.Cells(row, 3).Value = "à¸‹à¸·à¹‰à¸­à¸ªà¸´à¸™à¸„à¹‰à¸²"
             ws.Cells(row, 9).Value = amount
             totalPurchases = totalPurchases + amount
             row = row + 1
@@ -165,21 +164,21 @@ Function ProcessPurchases(ws As Worksheet, trialPLSheet As Worksheet, ByRef row 
         Select Case accountCode
             Case "5010.1", "5010.2"
                 amount = -trialPLSheet.Cells(i, 4).Value
-                ws.Cells(row, 2).Value = "ËÑ¡"
-                ws.Cells(row, 3).Value = IIf(accountCode = "5010.1", "Êè§¤×¹ÊÔ¹¤éÒ", "ÊèÇ¹Å´ÃÑº")
+                ws.Cells(row, 2).Value = "à¸«à¸±à¸"
+                ws.Cells(row, 3).Value = IIf(accountCode = "5010.1", "à¸ªà¹ˆà¸‡à¸„à¸·à¸™à¸ªà¸´à¸™à¸„à¹‰à¸²", "à¸ªà¹ˆà¸§à¸™à¸¥à¸”à¸£à¸±à¸š")
                 ws.Cells(row, 9).Value = amount
                 totalPurchases = totalPurchases - amount
                 row = row + 1
             Case "5010.3"
                 amount = trialPLSheet.Cells(i, 4).Value
-                ws.Cells(row, 2).Value = "ºÇ¡"
-                ws.Cells(row, 3).Value = "¤èÒ¢¹Êè§à¢éÒ"
+                ws.Cells(row, 2).Value = "à¸šà¸§à¸"
+                ws.Cells(row, 3).Value = "à¸„à¹ˆà¸²à¸‚à¸™à¸ªà¹ˆà¸‡à¹€à¸‚à¹‰à¸²"
                 ws.Cells(row, 9).Value = amount
                 totalPurchases = totalPurchases + amount
                 row = row + 1
             Case "5010.4"
                 amount = trialPLSheet.Cells(i, 5).Value
-                ws.Cells(row, 3).Value = "¤èÒáÃ§§Ò¹·Ò§µÃ§"
+                ws.Cells(row, 3).Value = "à¸„à¹ˆà¸²à¹à¸£à¸‡à¸‡à¸²à¸™à¸—à¸²à¸‡à¸•à¸£à¸‡"
                 ws.Cells(row, 9).Value = amount
                 totalPurchases = totalPurchases + amount
                 row = row + 1
@@ -187,7 +186,7 @@ Function ProcessPurchases(ws As Worksheet, trialPLSheet As Worksheet, ByRef row 
     Next i
     
     ' Add total purchases
-    ws.Cells(row, 3).Value = "ÃÇÁ«×éÍÊØ·¸Ô"
+    ws.Cells(row, 3).Value = "à¸£à¸§à¸¡à¸‹à¸·à¹‰à¸­à¸ªà¸¸à¸—à¸˜à¸´"
     ws.Cells(row, 9).Value = totalPurchases
     row = row + 1
     
@@ -203,7 +202,7 @@ Function AddEndingInventory(ws As Worksheet, trialPLSheet As Worksheet, row As L
     lastRow = trialPLSheet.Cells(trialPLSheet.Rows.Count, 1).End(xlUp).row
     firstOccurrence = True
     
-    ws.Cells(row, 2).Value = "ËÑ¡ ÊÔ¹¤éÒ¤§àËÅ×Í»ÅÒÂ§Ç´"
+    ws.Cells(row, 2).Value = "à¸«à¸±à¸ à¸ªà¸´à¸™à¸„à¹‰à¸²à¸„à¸‡à¹€à¸«à¸¥à¸·à¸­à¸›à¸¥à¸²à¸¢à¸‡à¸§à¸”"
     For i = 2 To lastRow
         If trialPLSheet.Cells(i, 2).Value = "1510" Then
             If firstOccurrence Then
@@ -267,7 +266,7 @@ Function ProcessServiceCosts(ws As Worksheet, trialPLSheet As Worksheet, startRo
     
     ' Display service costs
     If Application.WorksheetFunction.Sum(serviceCosts) > 0 Then
-        ws.Cells(row, 2).Value = "µé¹·Ø¹ºÃÔ¡ÒÃ"
+        ws.Cells(row, 2).Value = "à¸•à¹‰à¸™à¸—à¸¸à¸™à¸šà¸£à¸´à¸à¸²à¸£"
         ws.Cells(row, 2).Font.Bold = True
         row = row + 1
         
@@ -281,7 +280,7 @@ Function ProcessServiceCosts(ws As Worksheet, trialPLSheet As Worksheet, startRo
         Next i
         
         ' Display total service cost
-        ws.Cells(row, 3).Value = "ÃÇÁµé¹·Ø¹ºÃÔ¡ÒÃ"
+        ws.Cells(row, 3).Value = "à¸£à¸§à¸¡à¸•à¹‰à¸™à¸—à¸¸à¸™à¸šà¸£à¸´à¸à¸²à¸£"
         ws.Cells(row, 9).Value = totalServiceCost
         ws.Cells(row, 3).Font.Bold = True
         
@@ -348,7 +347,7 @@ Sub CreateDetailTwo(targetWorkbook As Workbook)
         End If
     Next i
     
-    ' Add "ÃÇÁ" row and calculate totals
+    ' Add "à¸£à¸§à¸¡" row and calculate totals
     row = AddTotalRow(detailWorksheet, dataStartRow, row)
     
     ' Add financial costs row
@@ -377,18 +376,18 @@ End Function
 
 Sub CreateDetailHeaders(ws As Worksheet)
     With ws.Range("A4")
-        .Value = "ÃÒÂÅÐàÍÕÂ´»ÃÐ¡Íº·Õè 2"
+        .Value = "à¸£à¸²à¸¢à¸¥à¸°à¹€à¸­à¸µà¸¢à¸”à¸›à¸£à¸°à¸à¸­à¸šà¸—à¸µà¹ˆ 2"
         .Font.Bold = True
     End With
     
     With ws
         .Range("A5:F5").Merge
-        .Range("A5").Value = "¤èÒãªé¨èÒÂã¹¡ÒÃ¢ÒÂáÅÐºÃÔËÒÃ"
+        .Range("A5").Value = "à¸„à¹ˆà¸²à¹ƒà¸Šà¹‰à¸ˆà¹ˆà¸²à¸¢à¹ƒà¸™à¸à¸²à¸£à¸‚à¸²à¸¢à¹à¸¥à¸°à¸šà¸£à¸´à¸«à¸²à¸£"
         .Range("A5").HorizontalAlignment = xlLeft
     
-        .Range("G5").Value = "¤èÒãªé¨èÒÂã¹¡ÒÃ¢ÒÂ"
-        .Range("H5").Value = "¤èÒãªé¨èÒÂã¹¡ÒÃºÃÔËÒÃ"
-        .Range("I5").Value = "¤èÒãªé¨èÒÂÍ×è¹"
+        .Range("G5").Value = "à¸„à¹ˆà¸²à¹ƒà¸Šà¹‰à¸ˆà¹ˆà¸²à¸¢à¹ƒà¸™à¸à¸²à¸£à¸‚à¸²à¸¢"
+        .Range("H5").Value = "à¸„à¹ˆà¸²à¹ƒà¸Šà¹‰à¸ˆà¹ˆà¸²à¸¢à¹ƒà¸™à¸à¸²à¸£à¸šà¸£à¸´à¸«à¸²à¸£"
+        .Range("I5").Value = "à¸„à¹ˆà¸²à¹ƒà¸Šà¹‰à¸ˆà¹ˆà¸²à¸¢à¸­à¸·à¹ˆà¸™"
     
         With .Range("A5:I5")
             .Font.Bold = True
@@ -416,13 +415,13 @@ Sub ProcessAccount(ws As Worksheet, accountCode As String, accountName As String
     If Not (accountCode >= "5360" And accountCode <= "5364") Then
         Select Case Left(accountCode, 4)
             Case "5300" To "5311"
-                ' Add the amount to "¤èÒãªé¨èÒÂã¹¡ÒÃ¢ÒÂ" (column G)
+                ' Add the amount to "à¸„à¹ˆà¸²à¹ƒà¸Šà¹‰à¸ˆà¹ˆà¸²à¸¢à¹ƒà¸™à¸à¸²à¸£à¸‚à¸²à¸¢" (column G)
                 ws.Cells(row, 7).Value = amount
             Case "5312" To "5350"
-                ' Add the amount to "¤èÒãªé¨èÒÂã¹¡ÒÃºÃÔËÒÃ" (column H)
+                ' Add the amount to "à¸„à¹ˆà¸²à¹ƒà¸Šà¹‰à¸ˆà¹ˆà¸²à¸¢à¹ƒà¸™à¸à¸²à¸£à¸šà¸£à¸´à¸«à¸²à¸£" (column H)
                 ws.Cells(row, 8).Value = amount
             Case "5351" To "5359", "5365" To "5999"
-                ' Add the amount to "¤èÒãªé¨èÒÂÍ×è¹" (column I)
+                ' Add the amount to "à¸„à¹ˆà¸²à¹ƒà¸Šà¹‰à¸ˆà¹ˆà¸²à¸¢à¸­à¸·à¹ˆà¸™" (column I)
                 ws.Cells(row, 9).Value = amount
         End Select
         
@@ -435,7 +434,7 @@ Function AddTotalRow(ws As Worksheet, dataStartRow As Long, row As Long) As Long
     
     With ws.Range(ws.Cells(row, 1), ws.Cells(row, 6))
         .Merge
-        .Value = "ÃÇÁ"
+        .Value = "à¸£à¸§à¸¡"
         .HorizontalAlignment = xlLeft
         .Font.Bold = True
     End With
@@ -452,7 +451,7 @@ Function AddFinancialCostsRow(ws As Worksheet, financialCosts As Double, row As 
     
     With ws.Range(ws.Cells(row, 1), ws.Cells(row, 6))
         .Merge
-        .Value = "¤èÒãªé¨èÒÂµé¹·Ø¹·Ò§¡ÒÃà§Ô¹"
+        .Value = "à¸„à¹ˆà¸²à¹ƒà¸Šà¹‰à¸ˆà¹ˆà¸²à¸¢à¸•à¹‰à¸™à¸—à¸¸à¸™à¸—à¸²à¸‡à¸à¸²à¸£à¹€à¸‡à¸´à¸™"
         .HorizontalAlignment = xlLeft
         .Font.Bold = False
     End With
