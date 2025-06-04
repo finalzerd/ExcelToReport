@@ -1,4 +1,3 @@
-Attribute VB_Name = "ProfitLossGeneration"
 Sub GenerateProfitLossStatement()
     Dim ws As Worksheet
     Dim trialPLSheets As Collection
@@ -35,7 +34,7 @@ Sub CreateSingleYearProfitLossStatement(trialPLSheet As Worksheet)
     ' Add details
     row = 5 ' Start below the header
     
-    ' Add "À¡“¬‡Àµÿ" and "ÀπË«¬:∫“∑"
+    ' Add "‡∏´‡∏°‡∏≤‡∏¢‡πÄ‡∏´‡∏ï‡∏∏" and "‡∏´‡∏ô‡πà‡∏ß‡∏¢:‡∏ö‡∏≤‡∏ó"
     AddProfitLossHeaderDetails wsPL, row
     
     row = row + 1
@@ -51,7 +50,7 @@ Sub CreateSingleYearProfitLossStatement(trialPLSheet As Worksheet)
     
     ' Calculate and add net profit/loss before financial costs and income tax
     With wsPL.Cells(row, 2)
-        .Value = "°”‰√°ËÕπµÈπ∑ÿπ∑“ß°“√‡ß‘π·≈–¿“…’‡ß‘π‰¥È"
+        .Value = "‡∏Å‡∏≥‡πÑ‡∏£‡∏Å‡πà‡∏≠‡∏ô‡∏ï‡πâ‡∏ô‡∏ó‡∏∏‡∏ô‡∏ó‡∏≤‡∏á‡∏Å‡∏≤‡∏£‡πÄ‡∏á‡∏¥‡∏ô‡πÅ‡∏•‡∏∞‡∏†‡∏≤‡∏©‡∏µ‡πÄ‡∏á‡∏¥‡∏ô‡πÑ‡∏î‡πâ"
         .Font.Bold = True
     End With
     
@@ -66,7 +65,7 @@ Sub CreateSingleYearProfitLossStatement(trialPLSheet As Worksheet)
     ' Add financial costs
     Dim financialCostsRow As Long
     financialCostsRow = row
-    wsPL.Cells(row, 2).Value = "µÈπ∑ÿπ∑“ß°“√‡ß‘π"
+    wsPL.Cells(row, 2).Value = "‡∏ï‡πâ‡∏ô‡∏ó‡∏∏‡∏ô‡∏ó‡∏≤‡∏á‡∏Å‡∏≤‡∏£‡πÄ‡∏á‡∏¥‡∏ô"
     wsPL.Cells(row, 9).Value = GetFinancialCosts(trialPLSheet)
     With wsPL.Cells(row, 9)
         .Borders(xlEdgeBottom).LineStyle = xlContinuous
@@ -75,7 +74,7 @@ Sub CreateSingleYearProfitLossStatement(trialPLSheet As Worksheet)
     
     ' Calculate profit/loss before income tax
     With wsPL.Cells(row, 2)
-        .Value = "°”‰√(¢“¥∑ÿπ)°ËÕπ¿“…’‡ß‘π‰¥È"
+        .Value = "‡∏Å‡∏≥‡πÑ‡∏£(‡∏Ç‡∏≤‡∏î‡∏ó‡∏∏‡∏ô)‡∏Å‡πà‡∏≠‡∏ô‡∏†‡∏≤‡∏©‡∏µ‡πÄ‡∏á‡∏¥‡∏ô‡πÑ‡∏î‡πâ"
         .Font.Bold = True
     End With
     Dim profitBeforeTaxRow As Long
@@ -89,13 +88,13 @@ Sub CreateSingleYearProfitLossStatement(trialPLSheet As Worksheet)
     ' Add income tax
     Dim incomeTaxRow As Long
     incomeTaxRow = row
-    wsPL.Cells(row, 2).Value = "¿“…’‡ß‘π‰¥È"
+    wsPL.Cells(row, 2).Value = "‡∏†‡∏≤‡∏©‡∏µ‡πÄ‡∏á‡∏¥‡∏ô‡πÑ‡∏î‡πâ"
     wsPL.Cells(row, 9).Value = GetIncomeTax(trialPLSheet)
     row = row + 1
     
     ' Calculate and add net profit/loss
     With wsPL.Cells(row, 2)
-        .Value = "°”‰√(¢“¥∑ÿπ) ÿ∑∏‘"
+        .Value = "‡∏Å‡∏≥‡πÑ‡∏£(‡∏Ç‡∏≤‡∏î‡∏ó‡∏∏‡∏ô)‡∏™‡∏∏‡∏ó‡∏ò‡∏¥"
         .Font.Bold = True
     End With
     With wsPL.Cells(row, 9)
@@ -142,7 +141,7 @@ Sub CreateMultiYearProfitLossStatement(trialPLSheets As Collection)
     ' Add details
     row = 5 ' Start below the header
     
-    ' Add "À¡“¬‡Àµÿ" and "ÀπË«¬:∫“∑"
+    ' Add "‡∏´‡∏°‡∏≤‡∏¢‡πÄ‡∏´‡∏ï‡∏∏" and "‡∏´‡∏ô‡πà‡∏ß‡∏¢:‡∏ö‡∏≤‡∏ó"
     AddProfitLossHeaderDetails wsPL, row
     
     row = row + 1
@@ -171,7 +170,7 @@ Sub CreateMultiYearProfitLossStatement(trialPLSheets As Collection)
     
     ' Calculate and add net profit/loss before financial costs and income tax using formula
     With wsPL.Cells(row, 2)
-        .Value = "°”‰√°ËÕπµÈπ∑ÿπ∑“ß°“√‡ß‘π·≈–¿“…’‡ß‘π‰¥È"
+        .Value = "‡∏Å‡∏≥‡πÑ‡∏£‡∏Å‡πà‡∏≠‡∏ô‡∏ï‡πâ‡∏ô‡∏ó‡∏∏‡∏ô‡∏ó‡∏≤‡∏á‡∏Å‡∏≤‡∏£‡πÄ‡∏á‡∏¥‡∏ô‡πÅ‡∏•‡∏∞‡∏†‡∏≤‡∏©‡∏µ‡πÄ‡∏á‡∏¥‡∏ô‡πÑ‡∏î‡πâ"
         .Font.Bold = True
     End With
     
@@ -190,7 +189,7 @@ Sub CreateMultiYearProfitLossStatement(trialPLSheets As Collection)
     ' Add financial costs (store row for reference)
     Dim financialCostsRow As Long
     financialCostsRow = row
-    wsPL.Cells(row, 2).Value = "µÈπ∑ÿπ∑“ß°“√‡ß‘π"
+    wsPL.Cells(row, 2).Value = "‡∏ï‡πâ‡∏ô‡∏ó‡∏∏‡∏ô‡∏ó‡∏≤‡∏á‡∏Å‡∏≤‡∏£‡πÄ‡∏á‡∏¥‡∏ô"
     wsPL.Cells(row, 7).Value = GetFinancialCosts(trialPLSheets(1))
     wsPL.Cells(row, 9).Value = GetFinancialCosts(trialPLSheets(2))
     With wsPL.Range(wsPL.Cells(row, 7), wsPL.Cells(row, 9))
@@ -200,7 +199,7 @@ Sub CreateMultiYearProfitLossStatement(trialPLSheets As Collection)
     
     ' Calculate profit/loss before income tax using formula
     With wsPL.Cells(row, 2)
-        .Value = "°”‰√(¢“¥∑ÿπ)°ËÕπ¿“…’‡ß‘π‰¥È"
+        .Value = "‡∏Å‡∏≥‡πÑ‡∏£(‡∏Ç‡∏≤‡∏î‡∏ó‡∏∏‡∏ô)‡∏Å‡πà‡∏≠‡∏ô‡∏†‡∏≤‡∏©‡∏µ‡πÄ‡∏á‡∏¥‡∏ô‡πÑ‡∏î‡πâ"
         .Font.Bold = True
     End With
     Dim profitBeforeTaxRow As Long
@@ -218,14 +217,14 @@ Sub CreateMultiYearProfitLossStatement(trialPLSheets As Collection)
     ' Add income tax (store row for reference)
     Dim incomeTaxRow As Long
     incomeTaxRow = row
-    wsPL.Cells(row, 2).Value = "¿“…’‡ß‘π‰¥È"
+    wsPL.Cells(row, 2).Value = "‡∏†‡∏≤‡∏©‡∏µ‡πÄ‡∏á‡∏¥‡∏ô‡πÑ‡∏î‡πâ"
     wsPL.Cells(row, 7).Value = GetIncomeTax(trialPLSheets(1))
     wsPL.Cells(row, 9).Value = GetIncomeTax(trialPLSheets(2))
     row = row + 1
     
     ' Calculate and add net profit/loss using formula
     With wsPL.Cells(row, 2)
-        .Value = "°”‰√(¢“¥∑ÿπ) ÿ∑∏‘"
+        .Value = "‡∏Å‡∏≥‡πÑ‡∏£(‡∏Ç‡∏≤‡∏î‡∏ó‡∏∏‡∏ô)‡∏™‡∏∏‡∏ó‡∏ò‡∏¥"
         .Font.Bold = True
     End With
     With wsPL.Cells(row, 7)
@@ -257,22 +256,22 @@ Function AddRevenueAccounts(ws As Worksheet, trialPLSheet As Worksheet, ByRef ro
     
     ' Store starting row for revenue details
     Dim revenueStartRow As Long
-    revenueStartRow = row + 1  ' Skip the "√“¬‰¥È" header row
+    revenueStartRow = row + 1  ' Skip the "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ" header row
     
     lastRow = trialPLSheet.Cells(trialPLSheet.Rows.Count, 2).End(xlUp).row
     totalRevenue = 0
     salesRevenue = 0
     otherIncome = 0
     
-    ' Add "√“¬‰¥È" header
+    ' Add "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ" header
     With ws.Cells(row, 2)
-        .Value = "√“¬‰¥È"
+        .Value = "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ"
         .Font.Bold = True
     End With
     row = row + 1
     
-    ' Add "√“¬‰¥È®“°°“√¢“¬À√◊Õ°“√„ÀÈ∫√‘°“√"
-    ws.Cells(row, 3).Value = "√“¬‰¥È®“°°“√¢“¬À√◊Õ°“√„ÀÈ∫√‘°“√"
+    ' Add "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ‡∏à‡∏≤‡∏Å‡∏Å‡∏≤‡∏£‡∏Ç‡∏≤‡∏¢‡∏´‡∏£‡∏∑‡∏≠‡∏Å‡∏≤‡∏£‡πÉ‡∏´‡πâ‡∏ö‡∏£‡∏¥‡∏Å‡∏≤‡∏£"
+    ws.Cells(row, 3).Value = "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ‡∏à‡∏≤‡∏Å‡∏Å‡∏≤‡∏£‡∏Ç‡∏≤‡∏¢‡∏´‡∏£‡∏∑‡∏≠‡∏Å‡∏≤‡∏£‡πÉ‡∏´‡πâ‡∏ö‡∏£‡∏¥‡∏Å‡∏≤‡∏£"
     
     ' Loop through trial balance and sum amounts for revenue accounts
     For i = 2 To lastRow
@@ -292,14 +291,14 @@ Function AddRevenueAccounts(ws As Worksheet, trialPLSheet As Worksheet, ByRef ro
     ws.Cells(row, 9).Value = salesRevenue
     row = row + 1
     
-    ' Add "√“¬‰¥ÈÕ◊Ëπ"
-    ws.Cells(row, 3).Value = "√“¬‰¥ÈÕ◊Ëπ"
+    ' Add "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ‡∏≠‡∏∑‡πà‡∏ô"
+    ws.Cells(row, 3).Value = "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ‡∏≠‡∏∑‡πà‡∏ô"
     ws.Cells(row, 9).Value = otherIncome
     row = row + 1
     
     ' Add total revenue with formula
     With ws.Cells(row, 2)
-        .Value = "√«¡√“¬‰¥È"
+        .Value = "‡∏£‡∏ß‡∏°‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ"
         .Font.Bold = True
     End With
     With ws.Cells(row, 9)
@@ -339,17 +338,17 @@ Function AddMultiYearRevenueAccounts(ws As Worksheet, trialPLSheets As Collectio
     
     ' Store starting row for revenue details
     Dim revenueStartRow As Long
-    revenueStartRow = row + 1  ' Skip the "√“¬‰¥È" header row
+    revenueStartRow = row + 1  ' Skip the "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ" header row
     
-    ' Add "√“¬‰¥È" header
+    ' Add "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ" header
     With ws.Cells(row, 2)
-        .Value = "√“¬‰¥È"
+        .Value = "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ"
         .Font.Bold = True
     End With
     row = row + 1
     
-    ' Add "√“¬‰¥È®“°°“√¢“¬À√◊Õ°“√„ÀÈ∫√‘°“√"
-    ws.Cells(row, 3).Value = "√“¬‰¥È®“°°“√¢“¬À√◊Õ°“√„ÀÈ∫√‘°“√"
+    ' Add "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ‡∏à‡∏≤‡∏Å‡∏Å‡∏≤‡∏£‡∏Ç‡∏≤‡∏¢‡∏´‡∏£‡∏∑‡∏≠‡∏Å‡∏≤‡∏£‡πÉ‡∏´‡πâ‡∏ö‡∏£‡∏¥‡∏Å‡∏≤‡∏£"
+    ws.Cells(row, 3).Value = "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ‡∏à‡∏≤‡∏Å‡∏Å‡∏≤‡∏£‡∏Ç‡∏≤‡∏¢‡∏´‡∏£‡∏∑‡∏≠‡∏Å‡∏≤‡∏£‡πÉ‡∏´‡πâ‡∏ö‡∏£‡∏¥‡∏Å‡∏≤‡∏£"
     
     ' Loop through trial balance and sum amounts for revenue accounts
     For i = 2 To lastRow
@@ -374,8 +373,8 @@ Function AddMultiYearRevenueAccounts(ws As Worksheet, trialPLSheets As Collectio
     ws.Cells(row, 9).Value = salesRevenuePrevious
     row = row + 1
     
-    ' Add "√“¬‰¥ÈÕ◊Ëπ"
-    ws.Cells(row, 3).Value = "√“¬‰¥ÈÕ◊Ëπ"
+    ' Add "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ‡∏≠‡∏∑‡πà‡∏ô"
+    ws.Cells(row, 3).Value = "‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ‡∏≠‡∏∑‡πà‡∏ô"
     ws.Cells(row, 7).Value = otherIncome
     ws.Cells(row, 9).Value = otherIncomePrevious
     row = row + 1
@@ -385,7 +384,7 @@ Function AddMultiYearRevenueAccounts(ws As Worksheet, trialPLSheets As Collectio
     
     ' Add total revenue
     With ws.Cells(row, 2)
-        .Value = "√«¡√“¬‰¥È"
+        .Value = "‡∏£‡∏ß‡∏°‡∏£‡∏≤‡∏¢‡πÑ‡∏î‡πâ"
         .Font.Bold = True
     End With
     With ws.Cells(row, 7)
@@ -458,7 +457,7 @@ Function AddExpenseAccounts(ws As Worksheet, trialPLSheet As Worksheet, ByRef ro
     
     ' Store starting row for expense details
     Dim expenseStartRow As Long
-    expenseStartRow = row + 1  ' Skip the "§Ë“„™È®Ë“¬" header row
+    expenseStartRow = row + 1  ' Skip the "‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢" header row
     
     lastRow = trialPLSheet.Cells(trialPLSheet.Rows.Count, 2).End(xlUp).row
     totalExpenses = 0
@@ -466,15 +465,15 @@ Function AddExpenseAccounts(ws As Worksheet, trialPLSheet As Worksheet, ByRef ro
     adminExpenses = 0
     otherExpenses = 0
     
-    ' Add "§Ë“„™È®Ë“¬" header
+    ' Add "‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢" header
     With ws.Cells(row, 2)
-        .Value = "§Ë“„™È®Ë“¬"
+        .Value = "‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢"
         .Font.Bold = True
     End With
     row = row + 1
     
-    ' Add "µÈπ∑ÿπ¢“¬À√◊ÕµÈπ∑ÿπ°“√„ÀÈ∫√‘°“√"
-    ws.Cells(row, 3).Value = "µÈπ∑ÿπ¢“¬À√◊ÕµÈπ∑ÿπ°“√„ÀÈ∫√‘°“√"
+    ' Add "‡∏ï‡πâ‡∏ô‡∏ó‡∏∏‡∏ô‡∏Ç‡∏≤‡∏¢‡∏´‡∏£‡∏∑‡∏≠‡∏ï‡πâ‡∏ô‡∏ó‡∏∏‡∏ô‡∏Å‡∏≤‡∏£‡πÉ‡∏´‡πâ‡∏ö‡∏£‡∏¥‡∏Å‡∏≤‡∏£"
+    ws.Cells(row, 3).Value = "‡∏ï‡πâ‡∏ô‡∏ó‡∏∏‡∏ô‡∏Ç‡∏≤‡∏¢‡∏´‡∏£‡∏∑‡∏≠‡∏ï‡πâ‡∏ô‡∏ó‡∏∏‡∏ô‡∏Å‡∏≤‡∏£‡πÉ‡∏´‡πâ‡∏ö‡∏£‡∏¥‡∏Å‡∏≤‡∏£"
     
     ' Get cost of goods sold
     costOfGoodsSold = GetCostOfGoodsSold(trialPLSheet)
@@ -498,21 +497,21 @@ Function AddExpenseAccounts(ws As Worksheet, trialPLSheet As Worksheet, ByRef ro
     Next i
     
     ' Add expense categories to the worksheet
-    ws.Cells(row, 3).Value = "§Ë“„™È®Ë“¬„π°“√¢“¬"
+    ws.Cells(row, 3).Value = "‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢‡πÉ‡∏ô‡∏Å‡∏≤‡∏£‡∏Ç‡∏≤‡∏¢"
     ws.Cells(row, 9).Value = sellingExpenses
     row = row + 1
     
-    ws.Cells(row, 3).Value = "§Ë“„™È®Ë“¬„π°“√∫√‘À“√"
+    ws.Cells(row, 3).Value = "‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢‡πÉ‡∏ô‡∏Å‡∏≤‡∏£‡∏ö‡∏£‡∏¥‡∏´‡∏≤‡∏£"
     ws.Cells(row, 9).Value = adminExpenses
     row = row + 1
     
-    ws.Cells(row, 3).Value = "§Ë“„™È®Ë“¬Õ◊Ëπ"
+    ws.Cells(row, 3).Value = "‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢‡∏≠‡∏∑‡πà‡∏ô"
     ws.Cells(row, 9).Value = otherExpenses
     row = row + 1
     
     ' Add total expenses with formula
     With ws.Cells(row, 2)
-        .Value = "√«¡§Ë“„™È®Ë“¬"
+        .Value = "‡∏£‡∏ß‡∏°‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢"
         .Font.Bold = True
     End With
     With ws.Cells(row, 9)
@@ -558,17 +557,17 @@ Function AddMultiYearExpenseAccounts(ws As Worksheet, trialPLSheets As Collectio
     
     ' Store starting row for expense details
     Dim expenseStartRow As Long
-    expenseStartRow = row + 1  ' Skip the "§Ë“„™È®Ë“¬" header row
+    expenseStartRow = row + 1  ' Skip the "‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢" header row
     
-    ' Add "§Ë“„™È®Ë“¬" header
+    ' Add "‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢" header
     With ws.Cells(row, 2)
-        .Value = "§Ë“„™È®Ë“¬"
+        .Value = "‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢"
         .Font.Bold = True
     End With
     row = row + 1
     
-    ' Add "µÈπ∑ÿπ¢“¬À√◊ÕµÈπ∑ÿπ°“√„ÀÈ∫√‘°“√"
-    ws.Cells(row, 3).Value = "µÈπ∑ÿπ¢“¬À√◊ÕµÈπ∑ÿπ°“√„ÀÈ∫√‘°“√"
+    ' Add "‡∏ï‡πâ‡∏ô‡∏ó‡∏∏‡∏ô‡∏Ç‡∏≤‡∏¢‡∏´‡∏£‡∏∑‡∏≠‡∏ï‡πâ‡∏ô‡∏ó‡∏∏‡∏ô‡∏Å‡∏≤‡∏£‡πÉ‡∏´‡πâ‡∏ö‡∏£‡∏¥‡∏Å‡∏≤‡∏£"
+    ws.Cells(row, 3).Value = "‡∏ï‡πâ‡∏ô‡∏ó‡∏∏‡∏ô‡∏Ç‡∏≤‡∏¢‡∏´‡∏£‡∏∑‡∏≠‡∏ï‡πâ‡∏ô‡∏ó‡∏∏‡∏ô‡∏Å‡∏≤‡∏£‡πÉ‡∏´‡πâ‡∏ö‡∏£‡∏¥‡∏Å‡∏≤‡∏£"
     
     ' Get cost of goods sold for both years
     costOfGoodsSold = GetMultiYearCostOfGoodsSold(trialPLSheets, costOfGoodsSoldPrevious)
@@ -597,17 +596,17 @@ Function AddMultiYearExpenseAccounts(ws As Worksheet, trialPLSheets As Collectio
     Next i
     
     ' Add expense categories to the worksheet
-    ws.Cells(row, 3).Value = "§Ë“„™È®Ë“¬„π°“√¢“¬"
+    ws.Cells(row, 3).Value = "‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢‡πÉ‡∏ô‡∏Å‡∏≤‡∏£‡∏Ç‡∏≤‡∏¢"
     ws.Cells(row, 7).Value = sellingExpenses
     ws.Cells(row, 9).Value = sellingExpensesPrevious
     row = row + 1
     
-    ws.Cells(row, 3).Value = "§Ë“„™È®Ë“¬„π°“√∫√‘À“√"
+    ws.Cells(row, 3).Value = "‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢‡πÉ‡∏ô‡∏Å‡∏≤‡∏£‡∏ö‡∏£‡∏¥‡∏´‡∏≤‡∏£"
     ws.Cells(row, 7).Value = adminExpenses
     ws.Cells(row, 9).Value = adminExpensesPrevious
     row = row + 1
     
-    ws.Cells(row, 3).Value = "§Ë“„™È®Ë“¬Õ◊Ëπ"
+    ws.Cells(row, 3).Value = "‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢‡∏≠‡∏∑‡πà‡∏ô"
     ws.Cells(row, 7).Value = otherExpenses
     ws.Cells(row, 9).Value = otherExpensesPrevious
     row = row + 1
@@ -616,7 +615,7 @@ Function AddMultiYearExpenseAccounts(ws As Worksheet, trialPLSheets As Collectio
     totalExpenses = costOfGoodsSold + sellingExpenses + adminExpenses + otherExpenses
     totalExpensesPrevious = costOfGoodsSoldPrevious + sellingExpensesPrevious + adminExpensesPrevious + otherExpensesPrevious
     With ws.Cells(row, 2)
-        .Value = "√«¡§Ë“„™È®Ë“¬"
+        .Value = "‡∏£‡∏ß‡∏°‡∏Ñ‡πà‡∏≤‡πÉ‡∏ä‡πâ‡∏à‡πà‡∏≤‡∏¢"
         .Font.Bold = True
     End With
     With ws.Cells(row, 7)
@@ -742,13 +741,13 @@ End Sub
 
 Sub AddProfitLossHeaderDetails(ws As Worksheet, row As Long)
     With ws.Cells(row, 6)
-        .Value = "À¡“¬‡Àµÿ"
+        .Value = "‡∏´‡∏°‡∏≤‡∏¢‡πÄ‡∏´‡∏ï‡∏∏"
         .Font.Bold = True
         .Font.Underline = xlUnderlineStyleSingle
     End With
     
     With ws.Cells(row, 9)
-        .Value = "ÀπË«¬:∫“∑"
+        .Value = "‡∏´‡∏ô‡πà‡∏ß‡∏¢:‡∏ö‡∏≤‡∏ó"
         .Font.Bold = True
         .Font.Underline = xlUnderlineStyleSingle
         .HorizontalAlignment = xlRight
