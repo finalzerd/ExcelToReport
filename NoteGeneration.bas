@@ -1,38 +1,38 @@
 Attribute VB_Name = "NoteGeneration"
 Sub CreateSingleYearNotes(ws As Worksheet, trialBalanceSheet As Worksheet, trialPLSheet As Worksheet)
-    ' Call CreateNote(ws, trialBalanceSheet, "�Թʴ�����¡����º����Թʴ", "1000", "1099")
+    ' Call CreateNote(ws, trialBalanceSheet, "เงินสดและรายการเทียบเท่าเงินสด", "1000", "1099")
     Call CreateFirstYearCashNote(ws, trialBalanceSheet)
-    Call CreateNote(ws, trialBalanceSheet, "�١˹���ä������١˹����ع���¹���", "1140", "1215", "1141")
-    Call CreateNote(ws, trialBalanceSheet, "�Թ���������������", "1141", "1141")
+    Call CreateNote(ws, trialBalanceSheet, "ลูกหนี้การค้าและลูกหนี้หมุนเวียนอื่น", "1140", "1215", "1141")
+    Call CreateNote(ws, trialBalanceSheet, "เงินให้กู้ยืมระยะสั้น", "1141", "1141")
     Call CreateFirstYearNoteForLandBuildingEquipment(ws, trialBalanceSheet)  ' New call for PPE note 1600-1659
-    Call CreateNote(ws, trialBalanceSheet, "�Թ��Ѿ�����", "1660", "1700")
-    Call CreateNote(ws, trialBalanceSheet, "�Թ�ԡ�Թ�ѭ������Թ������������鹨ҡʶҺѹ����Թ", "2001", "2009")
-    Call CreateNote(ws, trialBalanceSheet, "���˹���ä��������˹����ع���¹���", "2010", "2999", "2030,2045,2050,2051,2052,2100,2120,2121,2122,2123")
-    Call CreateNote(ws, trialBalanceSheet, "�Թ������������鹨ҡ�ؤ�����͡Ԩ��÷������Ǣ�ͧ�ѹ", "2030", "2030")
-    ' Call CreateNote(ws, trialBalanceSheet, "�Թ������������ǨҡʶҺѹ����Թ", "2120", "2123", "2121")
+    Call CreateNote(ws, trialBalanceSheet, "สินทรัพย์อื่น", "1660", "1700")
+    Call CreateNote(ws, trialBalanceSheet, "เงินเบิกเกินบัญชีและเงินกู้ยืมระยะสั้นจากสถาบันการเงิน", "2001", "2009")
+    Call CreateNote(ws, trialBalanceSheet, "เจ้าหนี้การค้าและเจ้าหนี้หมุนเวียนอื่น", "2010", "2999", "2030,2045,2050,2051,2052,2100,2120,2121,2122,2123")
+    Call CreateNote(ws, trialBalanceSheet, "เงินกู้ยืมระยะสั้นจากบุคคลหรือกิจการที่เกี่ยวข้องกัน", "2030", "2030")
+    ' Call CreateNote(ws, trialBalanceSheet, "เงินกู้ยืมระยะยาวจากสถาบันการเงิน", "2120", "2123", "2121")
     Call CreateFirstYearLongTermLoansNote(ws, trialBalanceSheet)
-    Call CreateNote(ws, trialBalanceSheet, "�Թ�������������", "2050", "2052")
-    Call CreateNote(ws, trialBalanceSheet, "�Թ������������Ǩҡ�ؤ�����͡Ԩ��÷������Ǣ�ͧ�ѹ", "2100", "2100")
-    Call CreateNote(ws, trialPLSheet, "��������", "4020", "4999")
+    Call CreateNote(ws, trialBalanceSheet, "เงินกู้ยืมระยะยาว", "2050", "2052")
+    Call CreateNote(ws, trialBalanceSheet, "เงินกู้ยืมระยะยาวจากบุคคลหรือกิจการที่เกี่ยวข้องกัน", "2100", "2100")
+    Call CreateNote(ws, trialPLSheet, "รายได้อื่น", "4020", "4999")
     Call CreateExpensesByNatureNote(ws)
     Call CreateFinancialApprovalNote(ws)
 End Sub
 
 Sub CreateMultiYearNotes(ws As Worksheet, trialBalanceSheets As Collection, trialPLSheets As Collection)
-    ' Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "�Թʴ�����¡����º����Թʴ", "1000", "1099")
+    ' Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "เงินสดและรายการเทียบเท่าเงินสด", "1000", "1099")
     Call CreateCashNote(ws, trialBalanceSheets)
-    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "�١˹���ä������١˹����ع���¹���", "1140", "1215", "1141")
-    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "�Թ���������������", "1141", "1141")
-    Call CreateNoteForLandBuildingEquipment(ws, trialBalanceSheets) ' New call to create ���Թ �Ҥ������ػ�ó� note
-    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "�Թ��Ѿ�����", "1660", "1700")
-    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "�Թ�ԡ�Թ�ѭ������Թ������������鹨ҡʶҺѹ����Թ", "2001", "2009")
-    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "���˹���ä��������˹����ع���¹���", "2010", "2999", "2030,2045,2050,2051,2052,2100,2120,2121,2122,2123")
-    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "�Թ������������鹨ҡ�ؤ�����͡Ԩ��÷������Ǣ�ͧ�ѹ", "2030", "2030")
-    ' Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "�Թ������������ǨҡʶҺѹ����Թ", "2120", "2123", "2121")
+    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "ลูกหนี้การค้าและลูกหนี้หมุนเวียนอื่น", "1140", "1215", "1141")
+    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "เงินให้กู้ยืมระยะสั้น", "1141", "1141")
+    Call CreateNoteForLandBuildingEquipment(ws, trialBalanceSheets) ' New call to create ที่ดิน อาคารและอุปกรณ์ note
+    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "สินทรัพย์อื่น", "1660", "1700")
+    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "เงินเบิกเกินบัญชีและเงินกู้ยืมระยะสั้นจากสถาบันการเงิน", "2001", "2009")
+    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "เจ้าหนี้การค้าและเจ้าหนี้หมุนเวียนอื่น", "2010", "2999", "2030,2045,2050,2051,2052,2100,2120,2121,2122,2123")
+    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "เงินกู้ยืมระยะสั้นจากบุคคลหรือกิจการที่เกี่ยวข้องกัน", "2030", "2030")
+    ' Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "เงินกู้ยืมระยะยาวจากสถาบันการเงิน", "2120", "2123", "2121")
     Call CreateLongTermLoansNote(ws, trialBalanceSheets, trialPLSheets)
-    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "�Թ�������������", "2050", "2052")
-    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "�Թ������������Ǩҡ�ؤ�����͡Ԩ��÷������Ǣ�ͧ�ѹ", "2100", "2100")
-    Call CreateMultiPeriodNote(ws, trialPLSheets, trialPLSheets, "��������", "4020", "4999")
+    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "เงินกู้ยืมระยะยาว", "2050", "2052")
+    Call CreateMultiPeriodNote(ws, trialBalanceSheets, trialPLSheets, "เงินกู้ยืมระยะยาวจากบุคคลหรือกิจการที่เกี่ยวข้องกัน", "2100", "2100")
+    Call CreateMultiPeriodNote(ws, trialPLSheets, trialPLSheets, "รายได้อื่น", "4020", "4999")
     Call CreateExpensesByNatureNote(ws)
     Call CreateFinancialApprovalNote(ws)
 End Sub
@@ -77,7 +77,7 @@ Function CreateNote(ws As Worksheet, trialSheet As Worksheet, noteName As String
     ws.Cells(noteRow, 1).Value = noteOrder + 2  ' Start from 3
     ws.Cells(noteRow, 1).HorizontalAlignment = xlCenter
     ws.Cells(noteRow, 2).Value = noteName
-    ws.Cells(noteRow, 9).Value = "˹��� : �ҷ"
+    ws.Cells(noteRow, 9).Value = "หน่วย : บาท"
     ws.Cells(noteRow + 1, 9).Value = year
     noteRow = noteRow + 2
 
@@ -109,7 +109,7 @@ Function CreateNote(ws As Worksheet, trialSheet As Worksheet, noteName As String
     ' Check if any account details were added to the note
     If noteCreated Then
         ' Add the total amount to the note
-        ws.Cells(noteRow, 3).Value = "���"
+        ws.Cells(noteRow, 3).Value = "รวม"
         ws.Cells(noteRow, 9).Value = totalAmount
         
         With ws.Cells(noteRow, 9)
@@ -192,7 +192,7 @@ Function CreateMultiPeriodNote(ws As Worksheet, trialBalanceSheets As Collection
     ws.Cells(noteRow, 1).Value = noteOrder + 2  ' Start from 3
     ws.Cells(noteRow, 1).HorizontalAlignment = xlCenter
     ws.Cells(noteRow, 2).Value = noteName
-    ws.Cells(noteRow, 9).Value = "˹��� : �ҷ"
+    ws.Cells(noteRow, 9).Value = "หน่วย : บาท"
     ws.Cells(noteRow + 1, 7).Value = years(1)
     ws.Cells(noteRow + 1, 9).Value = years(2)
     noteRow = noteRow + 2
@@ -261,7 +261,7 @@ Function CreateMultiPeriodNote(ws As Worksheet, trialBalanceSheets As Collection
     ' Check if any account details were added to the note
     If noteCreated Then
         ' Add the total amounts to the note
-        ws.Cells(noteRow, 3).Value = "���"
+        ws.Cells(noteRow, 3).Value = "รวม"
         ws.Cells(noteRow, 7).Value = totalAmount1
         ws.Cells(noteRow, 9).Value = totalAmount2
         
@@ -333,8 +333,8 @@ Function CreateFirstYearCashNote(ws As Worksheet, trialBalanceSheet As Worksheet
     ' Create the note header
     ws.Cells(noteRow, 1).Value = noteOrder + 2
     ws.Cells(noteRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(noteRow, 2).Value = "�Թʴ�����¡����º����Թʴ"
-    ws.Cells(noteRow, 9).Value = "˹��� : �ҷ"
+    ws.Cells(noteRow, 2).Value = "เงินสดและรายการเทียบเท่าเงินสด"
+    ws.Cells(noteRow, 9).Value = "หน่วย : บาท"
     noteRow = noteRow + 1
     ws.Cells(noteRow, 9).Value = year
     noteRow = noteRow + 1
@@ -357,7 +357,7 @@ Function CreateFirstYearCashNote(ws As Worksheet, trialBalanceSheet As Worksheet
 
     ' Add cash line if there's any amount
     If cashAmount <> 0 Then
-        ws.Cells(noteRow, 3).Value = "�Թʴ"
+        ws.Cells(noteRow, 3).Value = "เงินสด"
         ws.Cells(noteRow, 9).Value = cashAmount
         noteRow = noteRow + 1
         noteCreated = True
@@ -365,7 +365,7 @@ Function CreateFirstYearCashNote(ws As Worksheet, trialBalanceSheet As Worksheet
 
     ' Add bank deposits line if there's any amount
     If bankAmount <> 0 Then
-        ws.Cells(noteRow, 3).Value = "�Թ�ҡ��Ҥ��"
+        ws.Cells(noteRow, 3).Value = "เงินฝากธนาคาร"
         ws.Cells(noteRow, 9).Value = bankAmount
         noteRow = noteRow + 1
         noteCreated = True
@@ -374,7 +374,7 @@ Function CreateFirstYearCashNote(ws As Worksheet, trialBalanceSheet As Worksheet
     ' Add total if note was created
     If noteCreated Then
         totalAmount = cashAmount + bankAmount
-        ws.Cells(noteRow, 3).Value = "���"
+        ws.Cells(noteRow, 3).Value = "รวม"
         With ws.Cells(noteRow, 9)
             .Value = totalAmount
             .Borders(xlEdgeTop).LineStyle = xlContinuous
@@ -436,8 +436,8 @@ Function CreateCashNote(ws As Worksheet, trialBalanceSheets As Collection) As Bo
     ' Create the note header
     ws.Cells(noteRow, 1).Value = noteOrder + 2
     ws.Cells(noteRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(noteRow, 2).Value = "�Թʴ�����¡����º����Թʴ"
-    ws.Cells(noteRow, 9).Value = "˹��� : �ҷ"
+    ws.Cells(noteRow, 2).Value = "เงินสดและรายการเทียบเท่าเงินสด"
+    ws.Cells(noteRow, 9).Value = "หน่วย : บาท"
     noteRow = noteRow + 1
     ws.Cells(noteRow, 7).Value = years(1)
     ws.Cells(noteRow, 9).Value = years(2)
@@ -463,7 +463,7 @@ Function CreateCashNote(ws As Worksheet, trialBalanceSheets As Collection) As Bo
 
     ' Add cash line if there's any amount
     If cashAmount1 <> 0 Or cashAmount2 <> 0 Then
-        ws.Cells(noteRow, 3).Value = "�Թʴ"
+        ws.Cells(noteRow, 3).Value = "เงินสด"
         ws.Cells(noteRow, 7).Value = cashAmount1
         ws.Cells(noteRow, 9).Value = cashAmount2
         noteRow = noteRow + 1
@@ -472,7 +472,7 @@ Function CreateCashNote(ws As Worksheet, trialBalanceSheets As Collection) As Bo
 
     ' Add bank deposits line if there's any amount
     If bankAmount1 <> 0 Or bankAmount2 <> 0 Then
-        ws.Cells(noteRow, 3).Value = "�Թ�ҡ��Ҥ��"
+        ws.Cells(noteRow, 3).Value = "เงินฝากธนาคาร"
         ws.Cells(noteRow, 7).Value = bankAmount1
         ws.Cells(noteRow, 9).Value = bankAmount2
         noteRow = noteRow + 1
@@ -483,7 +483,7 @@ Function CreateCashNote(ws As Worksheet, trialBalanceSheets As Collection) As Bo
     If noteCreated Then
         totalAmount1 = cashAmount1 + bankAmount1
         totalAmount2 = cashAmount2 + bankAmount2
-        ws.Cells(noteRow, 3).Value = "���"
+        ws.Cells(noteRow, 3).Value = "รวม"
         With ws.Cells(noteRow, 7)
             .Value = totalAmount1
             .Borders(xlEdgeTop).LineStyle = xlContinuous
@@ -549,19 +549,19 @@ Function CreateFirstYearNoteForLandBuildingEquipment(ws As Worksheet, trialBalan
     ' Create the note header
     ws.Cells(noteRow, 1).Value = noteOrder + 2  ' Start from 3
     ws.Cells(noteRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(noteRow, 2).Value = "���Թ �Ҥ������ػ�ó�"
-    ws.Cells(noteRow, 9).Value = "˹��� : �ҷ"
+    ws.Cells(noteRow, 2).Value = "ที่ดิน อาคารและอุปกรณ์"
+    ws.Cells(noteRow, 9).Value = "หน่วย : บาท"
     noteRow = noteRow + 1
 
     ' Add column headers
-    ws.Cells(noteRow, 4).Value = "� 31 �.�. " & CStr(CLng(year) - 1)
-    ws.Cells(noteRow, 6).Value = "��������"
-    ws.Cells(noteRow, 7).Value = "��˹����͡"
-    ws.Cells(noteRow, 9).Value = "� 31 �.�. " & year
+    ws.Cells(noteRow, 4).Value = "ณ 31 ธ.ค. " & CStr(CLng(year) - 1)
+    ws.Cells(noteRow, 6).Value = "ซื้อเพิ่ม"
+    ws.Cells(noteRow, 7).Value = "จำหน่ายออก"
+    ws.Cells(noteRow, 9).Value = "ณ 31 ธ.ค. " & year
     noteRow = noteRow + 1
 
-    ' Add "�Ҥҷع���"
-    ws.Cells(noteRow, 3).Value = "�Ҥҷع���"
+    ' Add "ราคาทุนเดิม"
+    ws.Cells(noteRow, 3).Value = "ราคาทุนเดิม"
     ws.Cells(noteRow, 3).Font.Bold = True
     noteRow = noteRow + 1
 
@@ -588,7 +588,7 @@ Function CreateFirstYearNoteForLandBuildingEquipment(ws As Worksheet, trialBalan
 
     ' Add total row for assets
     If noteCreated Then
-        ws.Cells(noteRow, 3).Value = "���"
+        ws.Cells(noteRow, 3).Value = "รวม"
         For j = 6 To 9
             With ws.Cells(noteRow, j)
                 .Formula = "=SUM(" & ws.Cells(noteStartRow + 3, j).Address & ":" & ws.Cells(noteRow - 1, j).Address & ")"
@@ -606,8 +606,8 @@ Function CreateFirstYearNoteForLandBuildingEquipment(ws As Worksheet, trialBalan
         Exit Function
     End If
 
-    ' Add "����������Ҥ�����" header
-    ws.Cells(noteRow, 3).Value = "����������Ҥ�����"
+    ' Add "ค่าเสื่อมราคาสะสม" header
+    ws.Cells(noteRow, 3).Value = "ค่าเสื่อมราคาสะสม"
     ws.Cells(noteRow, 3).Font.Bold = True
     noteRow = noteRow + 1
 
@@ -632,7 +632,7 @@ Function CreateFirstYearNoteForLandBuildingEquipment(ws As Worksheet, trialBalan
     Next i
 
     ' Add total row for accumulated depreciation
-    ws.Cells(noteRow, 3).Value = "���"
+    ws.Cells(noteRow, 3).Value = "รวม"
     For j = 6 To 9
         If j <> 7 And j <> 8 Then  ' Skip columns G and H
             With ws.Cells(noteRow, j)
@@ -645,8 +645,8 @@ Function CreateFirstYearNoteForLandBuildingEquipment(ws As Worksheet, trialBalan
     accumulatedDepreciationTotalRow = noteRow
     noteRow = noteRow + 1
 
-    ' Add "��Ť���ط��" row
-    ws.Cells(noteRow, 3).Value = "��Ť���ط��"
+    ' Add "มูลค่าสุทธิ" row
+    ws.Cells(noteRow, 3).Value = "มูลค่าสุทธิ"
     ws.Cells(noteRow, 3).Font.Bold = True
     
     With ws.Cells(noteRow, 9)
@@ -657,8 +657,8 @@ Function CreateFirstYearNoteForLandBuildingEquipment(ws As Worksheet, trialBalan
     
     noteRow = noteRow + 1
 
-    ' Add "����������Ҥ�" row
-    ws.Cells(noteRow, 3).Value = "����������Ҥ�"
+    ' Add "ค่าเสื่อมราคา" row
+    ws.Cells(noteRow, 3).Value = "ค่าเสื่อมราคา"
     ws.Cells(noteRow, 3).Font.Bold = True
     ws.Cells(noteRow, 9).Formula = "=" & ws.Cells(accumulatedDepreciationTotalRow, 6).Address
     noteRow = noteRow + 1
@@ -718,19 +718,19 @@ Function CreateNoteForLandBuildingEquipment(ws As Worksheet, trialBalanceSheets 
     ' Create the note header
     ws.Cells(noteRow, 1).Value = noteOrder + 2  ' Start from 3
     ws.Cells(noteRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(noteRow, 2).Value = "���Թ �Ҥ������ػ�ó�"
-    ws.Cells(noteRow, 9).Value = "˹��� : �ҷ"
+    ws.Cells(noteRow, 2).Value = "ที่ดิน อาคารและอุปกรณ์"
+    ws.Cells(noteRow, 9).Value = "หน่วย : บาท"
     noteRow = noteRow + 1
 
     ' Add column headers
-    ws.Cells(noteRow, 4).Value = "� 31 �.�. " & years(2)
-    ws.Cells(noteRow, 6).Value = "��������"
-    ws.Cells(noteRow, 7).Value = "��˹����͡"
-    ws.Cells(noteRow, 9).Value = "� 31 �.�. " & years(1)
+    ws.Cells(noteRow, 4).Value = "ณ 31 ธ.ค. " & years(2)
+    ws.Cells(noteRow, 6).Value = "ซื้อเพิ่ม"
+    ws.Cells(noteRow, 7).Value = "จำหน่ายออก"
+    ws.Cells(noteRow, 9).Value = "ณ 31 ธ.ค. " & years(1)
     noteRow = noteRow + 1
 
-    ' Add "�Ҥҷع���"
-    ws.Cells(noteRow, 3).Value = "�Ҥҷع���"
+    ' Add "ราคาทุนเดิม"
+    ws.Cells(noteRow, 3).Value = "ราคาทุนเดิม"
     ws.Cells(noteRow, 3).Font.Bold = True
     noteRow = noteRow + 1
 
@@ -763,7 +763,7 @@ Function CreateNoteForLandBuildingEquipment(ws As Worksheet, trialBalanceSheets 
 
     ' Add total row for assets
     If noteCreated Then
-        ws.Cells(noteRow, 3).Value = "���"
+        ws.Cells(noteRow, 3).Value = "รวม"
         For j = 4 To 9
             If j <> 5 And j <> 8 Then  ' Skip columns E and H
                 With ws.Cells(noteRow, j)
@@ -783,8 +783,8 @@ Function CreateNoteForLandBuildingEquipment(ws As Worksheet, trialBalanceSheets 
         Exit Function
     End If
 
-    ' Add "����������Ҥ�����" header
-    ws.Cells(noteRow, 3).Value = "����������Ҥ�����"
+    ' Add "ค่าเสื่อมราคาสะสม" header
+    ws.Cells(noteRow, 3).Value = "ค่าเสื่อมราคาสะสม"
     ws.Cells(noteRow, 3).Font.Bold = True
     noteRow = noteRow + 1
 
@@ -811,7 +811,7 @@ Function CreateNoteForLandBuildingEquipment(ws As Worksheet, trialBalanceSheets 
     Next i
 
     ' Add total row for accumulated depreciation
-    ws.Cells(noteRow, 3).Value = "���"
+    ws.Cells(noteRow, 3).Value = "รวม"
     For j = 4 To 9
         If j <> 5 And j <> 8 Then  ' Skip columns E, G, and H
             With ws.Cells(noteRow, j)
@@ -825,8 +825,8 @@ Function CreateNoteForLandBuildingEquipment(ws As Worksheet, trialBalanceSheets 
     accumulatedDepreciationTotalRow = noteRow
     noteRow = noteRow + 1
 
-    ' Add "��Ť���ط��" row
-    ws.Cells(noteRow, 3).Value = "��Ť���ط��"
+    ' Add "มูลค่าสุทธิ" row
+    ws.Cells(noteRow, 3).Value = "มูลค่าสุทธิ"
     ws.Cells(noteRow, 3).Font.Bold = True
 
     ' Add borders to columns D, F, G, and I
@@ -842,8 +842,8 @@ Function CreateNoteForLandBuildingEquipment(ws As Worksheet, trialBalanceSheets 
 
     noteRow = noteRow + 1
 
-    ' Add "����������Ҥ�" row
-    ws.Cells(noteRow, 3).Value = "����������Ҥ�"
+    ' Add "ค่าเสื่อมราคา" row
+    ws.Cells(noteRow, 3).Value = "ค่าเสื่อมราคา"
     ws.Cells(noteRow, 3).Font.Bold = True
     ws.Cells(noteRow, 9).Formula = "=" & ws.Cells(accumulatedDepreciationTotalRow, 6).Address & "-" & ws.Cells(accumulatedDepreciationTotalRow, 7).Address
     noteRow = noteRow + 1
@@ -898,8 +898,8 @@ Function CreateFirstYearLongTermLoansNote(ws As Worksheet, trialSheet As Workshe
     ' Create the note header
     ws.Cells(noteRow, 1).Value = noteOrder + 2  ' Start from 3
     ws.Cells(noteRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(noteRow, 2).Value = "�Թ������������ǨҡʶҺѹ����Թ"
-    ws.Cells(noteRow, 9).Value = "˹��� : �ҷ"
+    ws.Cells(noteRow, 2).Value = "เงินกู้ยืมระยะยาวจากสถาบันการเงิน"
+    ws.Cells(noteRow, 9).Value = "หน่วย : บาท"
     ws.Cells(noteRow + 1, 9).Value = year
     noteRow = noteRow + 2
 
@@ -924,7 +924,7 @@ Function CreateFirstYearLongTermLoansNote(ws As Worksheet, trialSheet As Workshe
     ' Check if any account details were added to the note
     If noteCreated Then
         ' Add total row
-        ws.Cells(noteRow, 3).Value = "���"
+        ws.Cells(noteRow, 3).Value = "รวม"
         With ws.Cells(noteRow, 9)
             .Value = totalAmount
             .Borders(xlEdgeTop).LineStyle = xlContinuous
@@ -933,15 +933,15 @@ Function CreateFirstYearLongTermLoansNote(ws As Worksheet, trialSheet As Workshe
         noteRow = noteRow + 1
         
        ' Get current portion from user and store in global variable
-        gLoanCurrentPortion.CurrentYear = CDbl(InputBox("��سҡ�͡��ǹ�ͧ˹���Թ������Ƿ��֧��˹���������˹�觻� ����Ѻ�� " & year, "Current Portion"))
+        gLoanCurrentPortion.CurrentYear = CDbl(InputBox("กรุณากรอกส่วนของหนี้สินระยะยาวที่ถึงกำหนดชำระภายในหนึ่งปี สำหรับปี " & year, "Current Portion"))
         
         ' Add current portion row
-        ws.Cells(noteRow, 3).Value = "�ѡ ��ǹ�ͧ˹���Թ������Ƿ��֧��˹���������˹�觻�"
+        ws.Cells(noteRow, 3).Value = "หัก ส่วนของหนี้สินระยะยาวที่ถึงกำหนดชำระภายในหนึ่งปี"
         ws.Cells(noteRow, 9).Value = gLoanCurrentPortion.CurrentYear
         noteRow = noteRow + 1
         
         ' Add net amount row
-        ws.Cells(noteRow, 3).Value = "�Թ��������������ط�Ԩҡ��ǹ���֧��˹����Ф׹����˹�觻�"
+        ws.Cells(noteRow, 3).Value = "เงินกู้ยืมระยะยาวสุทธิจากส่วนที่ถึงกำหนดชำระคืนภายในหนึ่งปี"
         With ws.Cells(noteRow, 9)
             .Value = totalAmount - gLoanCurrentPortion.CurrentYear
             .Borders(xlEdgeTop).LineStyle = xlContinuous
@@ -960,7 +960,7 @@ Function CreateFirstYearLongTermLoansNote(ws As Worksheet, trialSheet As Workshe
 
     If noteRow > 34 Then
         ' Move the note to a new worksheet and recreate it
-        Set ws = HandleNoteExceedingRow34(ws, "�Թ������������ǨҡʶҺѹ����Թ", noteStartRow, noteRow, trialSheet)
+        Set ws = HandleNoteExceedingRow34(ws, "เงินกู้ยืมระยะยาวจากสถาบันการเงิน", noteStartRow, noteRow, trialSheet)
         noteCreated = True
     End If
 
@@ -1014,8 +1014,8 @@ Function CreateLongTermLoansNote(ws As Worksheet, trialBalanceSheets As Collecti
     ' Create note header
     ws.Cells(noteRow, 1).Value = noteOrder + 2
     ws.Cells(noteRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(noteRow, 2).Value = "�Թ������������ǨҡʶҺѹ����Թ"
-    ws.Cells(noteRow, 9).Value = "˹��� : �ҷ"
+    ws.Cells(noteRow, 2).Value = "เงินกู้ยืมระยะยาวจากสถาบันการเงิน"
+    ws.Cells(noteRow, 9).Value = "หน่วย : บาท"
     ws.Cells(noteRow + 1, 7).Value = years(1)
     ws.Cells(noteRow + 1, 9).Value = years(2)
     noteRow = noteRow + 2
@@ -1048,7 +1048,7 @@ Function CreateLongTermLoansNote(ws As Worksheet, trialBalanceSheets As Collecti
     ' Add total row
     If noteCreated Then
         With ws.Cells(noteRow, 3)
-            .Value = "���"
+            .Value = "รวม"
         End With
         With ws.Cells(noteRow, 7)
             .Value = totalAmount1
@@ -1063,18 +1063,18 @@ Function CreateLongTermLoansNote(ws As Worksheet, trialBalanceSheets As Collecti
         noteRow = noteRow + 1
         
        ' Get current portions from user and store in global variable
-        gLoanCurrentPortion.CurrentYear = CDbl(InputBox("��سҡ�͡��ǹ�ͧ˹���Թ������Ƿ��֧��˹���������˹�觻� ����Ѻ�� " & years(1), "Current Portion - Current Year"))
-        gLoanCurrentPortion.PreviousYear = CDbl(InputBox("��سҡ�͡��ǹ�ͧ˹���Թ������Ƿ��֧��˹���������˹�觻� ����Ѻ�� " & years(2), "Current Portion - Previous Year"))
+        gLoanCurrentPortion.CurrentYear = CDbl(InputBox("กรุณากรอกส่วนของหนี้สินระยะยาวที่ถึงกำหนดชำระภายในหนึ่งปี สำหรับปี " & years(1), "Current Portion - Current Year"))
+        gLoanCurrentPortion.PreviousYear = CDbl(InputBox("กรุณากรอกส่วนของหนี้สินระยะยาวที่ถึงกำหนดชำระภายในหนึ่งปี สำหรับปี " & years(2), "Current Portion - Previous Year"))
         
         ' Add current portion row
-        ws.Cells(noteRow, 3).Value = "�ѡ ��ǹ�ͧ˹���Թ������Ƿ��֧��˹���������˹�觻�"
+        ws.Cells(noteRow, 3).Value = "หัก ส่วนของหนี้สินระยะยาวที่ถึงกำหนดชำระภายในหนึ่งปี"
         ws.Cells(noteRow, 7).Value = gLoanCurrentPortion.CurrentYear
         ws.Cells(noteRow, 9).Value = gLoanCurrentPortion.PreviousYear
         noteRow = noteRow + 1
         
         ' Add net amount row
         With ws.Cells(noteRow, 3)
-            .Value = "�Թ��������������ط�Ԩҡ��ǹ���֧��˹����Ф׹����˹�觻�"
+            .Value = "เงินกู้ยืมระยะยาวสุทธิจากส่วนที่ถึงกำหนดชำระคืนภายในหนึ่งปี"
         End With
         With ws.Cells(noteRow, 7)
             .Value = totalAmount1 - gLoanCurrentPortion.CurrentYear
@@ -1098,7 +1098,7 @@ Function CreateLongTermLoansNote(ws As Worksheet, trialBalanceSheets As Collecti
     
     ' Handle pagination and formatting
     If noteRow > 34 Then
-        Set ws = HandleNoteExceedingRow34(ws, "�Թ������������ǨҡʶҺѹ����Թ", noteStartRow, noteRow, trialBalanceSheets(1))
+        Set ws = HandleNoteExceedingRow34(ws, "เงินกู้ยืมระยะยาวจากสถาบันการเงิน", noteStartRow, noteRow, trialBalanceSheets(1))
         noteCreated = True
     End If
     
@@ -1155,26 +1155,26 @@ Function CreateExpensesByNatureNote(ws As Worksheet) As Boolean
     ' Create the note header
     ws.Cells(noteRow, 1).Value = noteOrder + 2  ' Start from 3
     ws.Cells(noteRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(noteRow, 2).Value = "�������¨�ṡ��������ҵԢͧ��������"
+    ws.Cells(noteRow, 2).Value = "ค่าใช้จ่ายจำแนกตามธรรมชาติของค่าใช้จ่าย"
     
     ' Highlight the main title in yellow
     ws.Cells(noteRow, 2).Interior.Color = RGB(255, 255, 0)  ' Yellow highlight
     
-    ws.Cells(noteRow, 9).Value = "˹��� : �ҷ"
+    ws.Cells(noteRow, 9).Value = "หน่วย : บาท"
     ws.Cells(noteRow + 1, 7).Value = years(1)
     ws.Cells(noteRow + 1, 9).Value = years(2)
     noteRow = noteRow + 2
 
     ' Add expense categories
-    AddExpenseCategory ws, noteRow, "�������¹�ŧ��Թ���������ٻ��Чҹ�����ҧ��"
-    AddExpenseCategory ws, noteRow, "�ҹ�����¡Ԩ�����кѹ�֡����¨��½��·ع"
-    AddExpenseCategory ws, noteRow, "�ѵ�شԺ�����ʴ�������ͧ���"
-    AddExpenseCategory ws, noteRow, "�������¼Ż���ª�쾹ѡ�ҹ"
-    AddExpenseCategory ws, noteRow, "����������Ҥ���Ф�ҵѴ��˹���"
-    AddExpenseCategory ws, noteRow, "�����������"
+    AddExpenseCategory ws, noteRow, "การเปลี่ยนแปลงในสินค้าสำเร็จรูปและงานระหว่างทำ"
+    AddExpenseCategory ws, noteRow, "งานที่ทำโดยกิจการและบันทึกเป็นรายจ่ายฝ่ายทุน"
+    AddExpenseCategory ws, noteRow, "วัตถุดิบและวัสดุสิ้นเปลืองใช้ไป"
+    AddExpenseCategory ws, noteRow, "ค่าใช้จ่ายผลประโยชน์พนักงาน"
+    AddExpenseCategory ws, noteRow, "ค่าเสื่อมราคาและค่าตัดจำหน่าย"
+    AddExpenseCategory ws, noteRow, "ค่าใช้จ่ายอื่น"
 
     ' Add total
-    ws.Cells(noteRow, 3).Value = "���"
+    ws.Cells(noteRow, 3).Value = "รวม"
     ws.Cells(noteRow, 3).Font.Bold = True
     noteRow = noteRow + 1
 
@@ -1185,7 +1185,7 @@ Function CreateExpensesByNatureNote(ws As Worksheet) As Boolean
     ' Check if note exceeds 34 rows
     If noteRow - noteStartRow > 34 Then
         ' Move the note to a new worksheet
-        Set ws = HandleNoteExceedingRow34(ws, "���������¡����ѡɳТͧ��������", noteStartRow, noteRow, Nothing)
+        Set ws = HandleNoteExceedingRow34(ws, "ค่าใช้จ่ายแยกตามลักษณะของค่าใช้จ่าย", noteStartRow, noteRow, Nothing)
     End If
 
     ' Format the note
@@ -1202,7 +1202,7 @@ End Sub
 Function IsLimitedCompany(targetWorkbook As Workbook) As Boolean
     Dim infoSheet As Worksheet
     Set infoSheet = targetWorkbook.Sheets("Info")
-    IsLimitedCompany = (infoSheet.Range("B2").Value = "����ѷ�ӡѴ")
+    IsLimitedCompany = (infoSheet.Range("B2").Value = "บริษัทจำกัด")
 End Function
 
 Function CreateFinancialApprovalNote(ws As Worksheet) As Boolean
@@ -1230,12 +1230,12 @@ Function CreateFinancialApprovalNote(ws As Worksheet) As Boolean
     ' Create the note header
     ws.Cells(noteRow, 1).Value = noteOrder + 2
     ws.Cells(noteRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(noteRow, 2).Value = "���͹��ѵԧ�����Թ"
+    ws.Cells(noteRow, 2).Value = "การอนุมัติงบการเงิน"
     ws.Cells(noteRow, 2).Font.Bold = True
     noteRow = noteRow + 1
     
     ' Add approval text
-    ws.Cells(noteRow, 3).Value = "������Թ��������Ѻ͹��ѵ�����͡������Թ�¤�С�����ü�����ӹҨ�ͧ����ѷ����"
+    ws.Cells(noteRow, 3).Value = "งบการเงินนี้ได้การรับอนุมัติให้ออกงบการเงินโดยคณะกรรมการผู้มีอำนาจของบริษัทแล้ว"
     noteRow = noteRow + 1
     
     ' Add the "EndOfNote" mark
