@@ -1,4 +1,3 @@
-Attribute VB_Name = "BalanceSheetGeneration"
 Public Type LongTermLoanCurrentPortion
     CurrentYear As Double
     PreviousYear As Double
