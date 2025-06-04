@@ -1,4 +1,4 @@
-Attribute VB_Name = "MainProcedures"
+
 Public Sub GenerateFinancialStatementForExternalWorkbook()
     Dim targetWorkbookPath As Variant
     Dim targetWorkbook As Workbook
@@ -125,3 +125,5 @@ Function GetWorksheetsWithPrefix(wb As Workbook, prefix As String) As Collection
     
     Set GetWorksheetsWithPrefix = matchingSheets
 End Function
+
+
