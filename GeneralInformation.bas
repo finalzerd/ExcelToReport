@@ -1,4 +1,3 @@
-Attribute VB_Name = "GeneralInformation"
 Sub CreateGeneralInformation(targetWorkbook As Workbook)
     Dim ws As Worksheet
     Dim infoSheet As Worksheet
@@ -42,22 +41,22 @@ Sub CreateGeneralInformation(targetWorkbook As Workbook)
     ' Add the main title
     ws.Cells(5, 1).Value = "1"
     ws.Cells(5, 1).HorizontalAlignment = xlCenter
-    ws.Cells(5, 2).Value = "�����ŷ����"
+    ws.Cells(5, 2).Value = "ข้อมูลทั่วไป"
     ws.Cells(5, 2).Font.Bold = True
     
     ' Add 1.1 Legal Status
     ws.Cells(7, 3).Value = "1.1"
     ws.Cells(7, 3).HorizontalAlignment = xlCenter
     ws.Range(ws.Cells(7, 4), ws.Cells(7, 5)).Merge
-    ws.Cells(7, 4).Value = "ʶҹзҧ������"
+    ws.Cells(7, 4).Value = "สถานะทางกฎหมาย"
     ws.Range(ws.Cells(7, 6), ws.Cells(7, 8)).Merge
-    ws.Cells(7, 6).Value = "�繹ԵԺؤ�ŨѴ��駵����������"
+    ws.Cells(7, 6).Value = "เป็นนิติบุคคลจัดตั้งตามกฎหมายไทย"
     
     ' Add 1.2 Location
     ws.Cells(8, 3).Value = "1.2"
     ws.Cells(8, 3).HorizontalAlignment = xlCenter
     ws.Range(ws.Cells(8, 4), ws.Cells(8, 5)).Merge
-    ws.Cells(8, 4).Value = "ʶҹ�����"
+    ws.Cells(8, 4).Value = "สถานที่ตั้ง"
     Set mergedRange = ws.Range(ws.Cells(8, 6), ws.Cells(8, 8))
     mergedRange.Merge
     mergedRange.Value = entityData("D2")
@@ -67,7 +66,7 @@ Sub CreateGeneralInformation(targetWorkbook As Workbook)
     ws.Cells(9, 3).Value = "1.3"
     ws.Cells(9, 3).HorizontalAlignment = xlCenter
     ws.Range(ws.Cells(9, 4), ws.Cells(9, 5)).Merge
-    ws.Cells(9, 4).Value = "�ѡɳи�áԨ��С�ô��Թ�ҹ"
+    ws.Cells(9, 4).Value = "ลักษณะธุรกิจและการดำเนินงาน"
     Set mergedRange = ws.Range(ws.Cells(9, 6), ws.Cells(9, 8))
     mergedRange.Merge
     mergedRange.Value = entityData("E2")
@@ -76,13 +75,13 @@ Sub CreateGeneralInformation(targetWorkbook As Workbook)
     ' Add Company Status with order number 2
     ws.Cells(11, 1).Value = "2"
     ws.Cells(11, 1).HorizontalAlignment = xlCenter
-    ws.Cells(11, 2).Value = "�ҹС�ô��Թ�ҹ�ͧ����ѷ"
+    ws.Cells(11, 2).Value = "ฐานะการดำเนินงานของบริษัท"
     ws.Cells(11, 2).Font.Bold = True
     
     ' Combine text for company status
     Dim statusText As String
-    statusText = entityData("G2") & " �騴����¹��������š���������оҳԪ���繹ԵԺؤ�� ������ " & _
-                 entityData("A2") & " ������ѹ��� " & entityData("B2") & " ����¹�Ţ��� " & entityData("H2")
+    statusText = entityData("G2") & " ได้จดทะเบียนตามประมวลกฎหมายแพ่งและพาณิชย์เป็นนิติบุคคล ประเภท " & _
+                 entityData("A2") & " เมื่อวันที่ " & entityData("B2") & " ทะเบียนเลขที่ " & entityData("H2")
     
     Set mergedRange = ws.Range(ws.Cells(12, 3), ws.Cells(12, 8))
     mergedRange.Merge
