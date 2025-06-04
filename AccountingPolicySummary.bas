@@ -1,4 +1,3 @@
-Attribute VB_Name = "AccountingPolicySummary"
 Option Explicit
 
 ' Main procedure to create accounting policy summary
@@ -67,7 +66,7 @@ End Function
 Private Sub AddMainTopicHeader(ws As Worksheet)
     ws.Cells(Config.MainTopicRow, 1).Value = "4"
     ws.Cells(Config.MainTopicRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(Config.MainTopicRow, 2).Value = "��ػ��º�¡�úѭ�շ���Ӥѭ"
+    ws.Cells(Config.MainTopicRow, 2).Value = "สรุปนโยบายการบัญชีที่สำคัญ"
     ws.Cells(Config.MainTopicRow, 2).Font.Bold = True
 End Sub
 
