@@ -1,4 +1,3 @@
-Attribute VB_Name = "BasisOfPreparation"
 Sub CreateBasisOfPreparation(targetWorkbook As Workbook)
     Dim ws As Worksheet
     Dim basisFilePath As String
@@ -34,7 +33,7 @@ Sub CreateBasisOfPreparation(targetWorkbook As Workbook)
     ' Add the main title and make it bold
     ws.Cells(currentRow, 1).Value = "3"
     ws.Cells(currentRow, 1).HorizontalAlignment = xlCenter
-    ws.Cells(currentRow, 2).Value = "ࡳ��㹡�èѴ����й��ʹͧ�����Թ"
+    ws.Cells(currentRow, 2).Value = "เกณฑ์ในการจัดทำและนำเสนองบการเงิน"
     FormatTitleCell ws.Range(ws.Cells(currentRow, 2), ws.Cells(currentRow, 2))
     currentRow = currentRow + 1
     
