@@ -1,4 +1,3 @@
-Attribute VB_Name = "ChangesInEquity"
 Sub CreateStatementOfChangesInEquity(targetWorkbook As Workbook)
     Dim ws As Worksheet
     Dim infoSheet As Worksheet
@@ -11,9 +10,9 @@ Sub CreateStatementOfChangesInEquity(targetWorkbook As Workbook)
     Dim PreviousYear As String
     Dim isFirstYear As Boolean
     
-    ' Check if it's a "∫√‘…—∑®”°—¥"
+    ' Check if it's a "‡∏ö‡∏£‡∏¥‡∏©‡∏±‡∏ó‡∏à‡∏≥‡∏Å‡∏±‡∏î"
     Set infoSheet = targetWorkbook.Sheets("Info")
-    If infoSheet.Range("B2").Value <> "∫√‘…—∑®”°—¥" Then
+    If infoSheet.Range("B2").Value <> "‡∏ö‡∏£‡∏¥‡∏©‡∏±‡∏ó‡∏à‡∏≥‡∏Å‡∏±‡∏î" Then
         Exit Sub
     End If
     
@@ -44,10 +43,10 @@ Sub CreateStatementOfChangesInEquity(targetWorkbook As Workbook)
     ' Start adding details
     row = 5 ' Start below the header
     
-    ' Add "ÀπË«¬:∫“∑" with top and bottom borders
+    ' Add "‡∏´‡∏ô‡πà‡∏ß‡∏¢:‡∏ö‡∏≤‡∏ó" with top and bottom borders
     With ws.Range(ws.Cells(row, 3), ws.Cells(row, 9))
         .Merge
-        .Value = "ÀπË«¬:∫“∑"
+        .Value = "‡∏´‡∏ô‡πà‡∏ß‡∏¢:‡∏ö‡∏≤‡∏ó"
         .HorizontalAlignment = xlCenter
     End With
     
@@ -55,7 +54,7 @@ Sub CreateStatementOfChangesInEquity(targetWorkbook As Workbook)
     
     ' Add column headers with bottom borders, wrap text, and center alignment
     With ws.Cells(row, 3)
-        .Value = "∑ÿπ‡√◊ÕπÀÿÈπ∑’ËÕÕ°·≈–™”√–·≈È«"
+        .Value = "‡∏ó‡∏∏‡∏ô‡πÄ‡∏£‡∏∑‡∏≠‡∏ô‡∏´‡∏∏‡πâ‡∏ô‡∏ó‡∏µ‡πà‡∏≠‡∏≠‡∏Å‡πÅ‡∏•‡∏∞‡∏ä‡∏≥‡∏£‡∏∞‡πÅ‡∏•‡πâ‡∏ß"
         .Borders(xlEdgeBottom).LineStyle = xlContinuous
         .WrapText = True
         .HorizontalAlignment = xlCenter
@@ -63,7 +62,7 @@ Sub CreateStatementOfChangesInEquity(targetWorkbook As Workbook)
     End With
 
     With ws.Cells(row, 6)
-        .Value = "°”‰√(¢“¥∑ÿπ) – ¡"
+        .Value = "‡∏Å‡∏≥‡πÑ‡∏£(‡∏Ç‡∏≤‡∏î‡∏ó‡∏∏‡∏ô)‡∏™‡∏∞‡∏™‡∏°"
         .Borders(xlEdgeBottom).LineStyle = xlContinuous
         .WrapText = True
         .HorizontalAlignment = xlCenter
@@ -71,7 +70,7 @@ Sub CreateStatementOfChangesInEquity(targetWorkbook As Workbook)
     End With
 
     With ws.Cells(row, 9)
-        .Value = "√«¡"
+        .Value = "‡∏£‡∏ß‡∏°"
         .Borders(xlEdgeBottom).LineStyle = xlContinuous
         .WrapText = True
         .HorizontalAlignment = xlCenter
@@ -86,14 +85,14 @@ Sub CreateStatementOfChangesInEquity(targetWorkbook As Workbook)
     If Not isFirstYear Then
         ' Previous Year
         ' Add opening balance for previous year
-        ws.Cells(row, 1).Value = "¬Õ¥§ß‡À≈◊Õ ≥ «—π∑’Ë 1 ¡°√“§¡ " & PreviousYear
+        ws.Cells(row, 1).Value = "‡∏¢‡∏≠‡∏î‡∏Ñ‡∏á‡πÄ‡∏´‡∏•‡∏∑‡∏≠ ‡∏ì ‡∏ß‡∏±‡∏ô‡∏ó‡∏µ‡πà 1 ‡∏°‡∏Å‡∏£‡∏≤‡∏Ñ‡∏° " & PreviousYear
         Dim paidUpCapitalPreviousYear As Double
         paidUpCapitalPreviousYear = GetAmountFromSheet(trialBalance2, "3010", "F")
         ws.Cells(row, 3).Value = paidUpCapitalPreviousYear
         row = row + 1
         
         ' Add net profit for previous year
-        ws.Cells(row, 1).Value = "°”‰√ (¢“¥∑ÿπ)  ÿ∑∏‘  ”À√—∫ª’ " & PreviousYear
+        ws.Cells(row, 1).Value = "‡∏Å‡∏≥‡πÑ‡∏£ (‡∏Ç‡∏≤‡∏î‡∏ó‡∏∏‡∏ô) ‡∏™‡∏∏‡∏ó‡∏ò‡∏¥ ‡∏™‡∏≥‡∏´‡∏£‡∏±‡∏ö‡∏õ‡∏µ " & PreviousYear
         Dim netProfitPreviousYear As Double
         netProfitPreviousYear = GetLastAmountInColumn(trialPL2, "G")
         ws.Cells(row, 6).Value = netProfitPreviousYear
@@ -101,7 +100,7 @@ Sub CreateStatementOfChangesInEquity(targetWorkbook As Workbook)
         row = row + 1
         
         ' Add closing balance for previous year
-        ws.Cells(row, 1).Value = "¬Õ¥§ß‡À≈◊Õ ≥ «—π∑’Ë 31 ∏—π«“§¡ " & PreviousYear
+        ws.Cells(row, 1).Value = "‡∏¢‡∏≠‡∏î‡∏Ñ‡∏á‡πÄ‡∏´‡∏•‡∏∑‡∏≠ ‡∏ì ‡∏ß‡∏±‡∏ô‡∏ó‡∏µ‡πà 31 ‡∏ò‡∏±‡∏ô‡∏ß‡∏≤‡∏Ñ‡∏° " & PreviousYear
         Dim retainedEarningsPreviousYear As Double
         retainedEarningsPreviousYear = GetAmountFromSheet(trialBalance2, "3020", "F")
         ws.Cells(row, 3).Value = paidUpCapitalPreviousYear
@@ -118,7 +117,7 @@ Sub CreateStatementOfChangesInEquity(targetWorkbook As Workbook)
     
     ' Current Year
     ' Add opening balance for current year
-    ws.Cells(row, 1).Value = "¬Õ¥§ß‡À≈◊Õ ≥ «—π∑’Ë 1 ¡°√“§¡ " & year
+    ws.Cells(row, 1).Value = "‡∏¢‡∏≠‡∏î‡∏Ñ‡∏á‡πÄ‡∏´‡∏•‡∏∑‡∏≠ ‡∏ì ‡∏ß‡∏±‡∏ô‡∏ó‡∏µ‡πà 1 ‡∏°‡∏Å‡∏£‡∏≤‡∏Ñ‡∏° " & year
     Dim paidUpCapitalCurrentYear As Double
     paidUpCapitalCurrentYear = GetAmountFromSheet(trialBalance1, "3010", "F")
     ws.Cells(row, 3).Value = paidUpCapitalCurrentYear
@@ -131,7 +130,7 @@ Sub CreateStatementOfChangesInEquity(targetWorkbook As Workbook)
     row = row + 1
     
     ' Add net profit for current year
-    ws.Cells(row, 1).Value = "°”‰√ (¢“¥∑ÿπ)  ÿ∑∏‘  ”À√—∫ª’ " & year
+    ws.Cells(row, 1).Value = "‡∏Å‡∏≥‡πÑ‡∏£ (‡∏Ç‡∏≤‡∏î‡∏ó‡∏∏‡∏ô) ‡∏™‡∏∏‡∏ó‡∏ò‡∏¥ ‡∏™‡∏≥‡∏´‡∏£‡∏±‡∏ö‡∏õ‡∏µ " & year
     Dim netProfitCurrentYear As Double
     netProfitCurrentYear = GetLastAmountInColumn(trialPL1, "G")
     ws.Cells(row, 6).Value = netProfitCurrentYear
@@ -139,7 +138,7 @@ Sub CreateStatementOfChangesInEquity(targetWorkbook As Workbook)
     row = row + 1
     
     ' Add closing balance for current year
-    ws.Cells(row, 1).Value = "¬Õ¥§ß‡À≈◊Õ ≥ «—π∑’Ë 31 ∏—π«“§¡ " & year
+    ws.Cells(row, 1).Value = "‡∏¢‡∏≠‡∏î‡∏Ñ‡∏á‡πÄ‡∏´‡∏•‡∏∑‡∏≠ ‡∏ì ‡∏ß‡∏±‡∏ô‡∏ó‡∏µ‡πà 31 ‡∏ò‡∏±‡∏ô‡∏ß‡∏≤‡∏Ñ‡∏° " & year
     Dim retainedEarningsCurrentYear As Double
     retainedEarningsCurrentYear = GetAmountFromSheet(trialBalance1, "3020", "F")
     ws.Cells(row, 3).Value = paidUpCapitalCurrentYear
