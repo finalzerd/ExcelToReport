@@ -1,4 +1,3 @@
-Attribute VB_Name = "Config"
 Option Explicit
 
 ' Sheet names
