@@ -1,4 +1,3 @@
-
 Public Sub GenerateFinancialStatementForExternalWorkbook()
     Dim targetWorkbookPath As Variant
     Dim targetWorkbook As Workbook
@@ -56,61 +55,46 @@ End Function
 
 Public Sub GenerateFinancialStatement(targetWorkbook As Workbook)
     Dim ws As Worksheet
-    Dim trialBalanceSheets As Collection
-    Dim trialPLSheets As Collection
+    Dim TB1Sheet As Worksheet
     
-    ' Set the worksheet object
+    ' Set the worksheet object for notes
     On Error Resume Next
     Set ws = targetWorkbook.Sheets("Note1")
     If ws Is Nothing Then
         Set ws = targetWorkbook.Sheets.Add(After:=targetWorkbook.Sheets(targetWorkbook.Sheets.Count))
-        ws.Name = "Note1"
+        ws.Name = "N1"  ' Use N-series naming convention
+    Else
+        ' Rename existing sheet to N-series format
+        ws.Name = "N1"
     End If
     On Error GoTo 0
     
-    ' Get the TrialBalance and TrialPL sheets
-    Set trialBalanceSheets = GetWorksheetsWithPrefix(targetWorkbook, "Trial Balance")
-    Set trialPLSheets = GetWorksheetsWithPrefix(targetWorkbook, "Trial PL")
+    ' Get the TB1 sheet (new unified format)
+    On Error GoTo TB1NotFound
+    Set TB1Sheet = targetWorkbook.Sheets("TB1")
+    On Error GoTo 0
     
-    ' Check the number of TrialBalance and TrialPL sheets
-    If trialBalanceSheets.Count = 1 And trialPLSheets.Count = 1 Then
-        ' Single-year statement generation
-        If CreateHeader(ws) Then
-            CreateSingleYearNotes ws, trialBalanceSheets(1), trialPLSheets(1)
-            CreateFirstYearBalanceSheet trialBalanceSheets(1)
-            CreateSingleYearProfitLossStatement trialPLSheets(1)
-        Else
-            MsgBox "Failed to create header.", vbExclamation
-            Exit Sub
-        End If
-    ElseIf trialBalanceSheets.Count = 2 And trialPLSheets.Count = 2 Then
-        ' Multi-year statement generation
-        If CreateHeader(ws) Then
-            CreateMultiYearNotes ws, trialBalanceSheets, trialPLSheets
-            CreateMultiPeriodBalanceSheet trialBalanceSheets
-            CreateMultiYearProfitLossStatement trialPLSheets
-        Else
-            MsgBox "Failed to create header.", vbExclamation
-            Exit Sub
-        End If
-    Else
-        MsgBox "Invalid number of TrialBalance or TrialPL sheets. Please ensure there are either one or two sheets of each type.", vbExclamation
+    ' Check if TB1 sheet exists and has data
+    If TB1Sheet Is Nothing Then
+        MsgBox "TB1 sheet not found. Please ensure the TB1 sheet exists with the required data format.", vbExclamation
         Exit Sub
     End If
     
-    ' Create Detail sheets for both single and multi-year scenarios
-    CreateDetailOne targetWorkbook
-    CreateDetailTwo targetWorkbook
+    ' Focus only on note generation for now
+    ' Determine if this is single or multiple period based on data structure
+    ' For now, assume multiple period (as specified in requirements)
+    If CreateHeader(ws) Then
+        CreateMultiPeriodNotesFromTB1 ws, TB1Sheet
+    Else
+        MsgBox "Failed to create header.", vbExclamation
+        Exit Sub
+    End If
     
-    ' Generate common components
-    CreateGICContent targetWorkbook
+    Exit Sub
     
-    ' In the GenerateFinancialStatement function, add this line:
-    CreateStatementOfChangesInEquity targetWorkbook
-    
-    ' Add guarantee note to all relevant financial statement sheets
-    AddGuaranteeNoteToFinancialStatements targetWorkbook
-    
+TB1NotFound:
+    MsgBox "TB1 sheet not found. This new version requires a TB1 sheet with the unified trial balance format.", vbCritical
+    Exit Sub
 End Sub
 
 Function GetWorksheetsWithPrefix(wb As Workbook, prefix As String) As Collection
@@ -125,5 +109,4 @@ Function GetWorksheetsWithPrefix(wb As Workbook, prefix As String) As Collection
     
     Set GetWorksheetsWithPrefix = matchingSheets
 End Function
-
 
