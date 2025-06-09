@@ -1,3 +1,6 @@
+' Updated utility functions to work with TB1 format
+' TB1 Format: Column A = Account Name, Column B = Account Code, Column C = Previous Period, Column D = Current Period
+
 Function CreateHeader(ws As Worksheet, Optional headerType As String = "Notes") As Boolean
     Dim i As Integer
     Dim infoSheet As Worksheet
@@ -28,7 +31,7 @@ Function CreateHeader(ws As Worksheet, Optional headerType As String = "Notes") 
                     Case "Details"
                         ws.Cells(i, 1).Value = "รายละเอียดประกอบงบการเงิน"
                     Case "Balance Sheet"
-                        ws.Cells(i, 1).Value = "งบฐานะการเงิน"
+                        ws.Cells(i, 1).Value = "งบดุลยะการเงิน"
                     Case "Profit and Loss Statement"
                         ws.Cells(i, 1).Value = "งบกำไรขาดทุน จำแนกค่าใช้จ่ายตามหน้าที่ - แบบขั้นเดียว"
                     Case "Statement of Changes in Equity"
@@ -51,7 +54,6 @@ Function CreateHeader(ws As Worksheet, Optional headerType As String = "Notes") 
     ' Return True to indicate that the header was created successfully
     CreateHeader = True
 End Function
-
 
 Sub FormatWorksheet(ws As Worksheet)
     ' Apply Thai Sarabun font and font size 14 to the worksheet
@@ -93,20 +95,21 @@ Sub AddHeaderDetails(ws As Worksheet, row As Long)
     End With
 End Sub
 
-Function GetAmountFromPreviousPeriod(trialBalanceSheet As Worksheet, accountCode As String) As Double
+Function GetAmountFromTB1ByAccountCode(TB1Sheet As Worksheet, accountCode As String, periodColumn As Integer) As Double
+    ' periodColumn: 3 = Previous Period (Column C), 4 = Current Period (Column D)
     Dim i As Long
     Dim lastRow As Long
     
-    lastRow = trialBalanceSheet.Cells(trialBalanceSheet.Rows.Count, 1).End(xlUp).row
+    lastRow = TB1Sheet.Cells(TB1Sheet.Rows.Count, 2).End(xlUp).row
     
     For i = 2 To lastRow
-        If trialBalanceSheet.Cells(i, 2).Value = accountCode Then
-            GetAmountFromPreviousPeriod = trialBalanceSheet.Cells(i, 6).Value
+        If TB1Sheet.Cells(i, 2).Value = accountCode Then
+            GetAmountFromTB1ByAccountCode = TB1Sheet.Cells(i, periodColumn).Value
             Exit Function
         End If
     Next i
     
-    GetAmountFromPreviousPeriod = 0
+    GetAmountFromTB1ByAccountCode = 0
 End Function
 
 Sub FormatAndAdjustCell(rng As Range)
@@ -166,7 +169,6 @@ Function GetTextHeight(cell As Range) As Double
     GetTextHeight = (lineCount * 15) + 5
 End Function
 
-
 Function GetFinancialYears(ws As Worksheet, Optional includePreviousYear As Boolean = False) As Variant
     Dim targetWorkbook As Workbook
     Dim infoSheet As Worksheet
@@ -218,6 +220,110 @@ ErrorHandler:
     GetFinancialYears = result
 End Function
 
+Function ContainsAccountCode(uniqueAccountCodes As Collection, accountCode As String) As Boolean
+    On Error Resume Next
+    uniqueAccountCodes.Item CStr(accountCode)
+    ContainsAccountCode = (Err.Number = 0)
+    On Error GoTo 0
+End Function
+
+Sub FormatNote(ws As Worksheet, startRow As Long, endRow As Long)
+    Dim accountingFormat As String
+    accountingFormat = "_( * #,##0.00_);_( * (#,##0.00);_( * ""-""??_);_(@_)"
+
+    With ws.Range(ws.Cells(startRow, 1), ws.Cells(endRow, 11))
+        .Font.Name = "TH Sarabun New"
+        .Font.Size = 14
+        
+        ' Set accounting format for columns D, F, G, and I if they contain values
+        Dim column As Variant
+        For Each column In Array("D", "F", "G", "I")
+            If WorksheetFunction.CountA(.Columns(column)) > 0 Then
+                .Columns(column).NumberFormatLocal = accountingFormat
+            End If
+        Next column
+        
+        ' Right align amount columns
+        .Columns("D").HorizontalAlignment = xlRight
+        .Columns("F").HorizontalAlignment = xlRight
+        .Columns("G").HorizontalAlignment = xlRight
+        .Columns("I").HorizontalAlignment = xlRight
+    End With
+    
+    ' Bold the note name and total
+    ws.Cells(startRow, 2).Font.Bold = True
+    ws.Cells(endRow - 1, 3).Font.Bold = True
+    
+    ' Adjust column widths
+    ws.Columns("A").ColumnWidth = 4
+    ws.Columns("B").ColumnWidth = 4
+    ws.Columns("C").ColumnWidth = 25
+    ws.Columns("D").ColumnWidth = 12
+    ws.Columns("E").ColumnWidth = 2
+    ws.Columns("F").ColumnWidth = 12
+    ws.Columns("G").ColumnWidth = 12
+    ws.Columns("H").ColumnWidth = 2
+    ws.Columns("I").ColumnWidth = 12
+    
+    ' Format year header row (assuming it's in the second row of the note)
+    With ws.Rows(startRow + 1)
+        .NumberFormat = "@"  ' Set to text format to prevent number formatting
+        .HorizontalAlignment = xlCenter
+        .Font.Underline = xlUnderlineStyleSingle
+    End With
+    
+    ' Reapply accounting format to amount columns, excluding the year header
+    If endRow > startRow + 2 Then
+        Dim reapplyRange As Range
+        Set reapplyRange = Union( _
+            ws.Range(ws.Cells(startRow + 2, 4), ws.Cells(endRow, 4)), _
+            ws.Range(ws.Cells(startRow + 2, 6), ws.Cells(endRow, 6)), _
+            ws.Range(ws.Cells(startRow + 2, 7), ws.Cells(endRow, 7)), _
+            ws.Range(ws.Cells(startRow + 2, 9), ws.Cells(endRow, 9)) _
+        )
+        reapplyRange.NumberFormatLocal = accountingFormat
+    End If
+End Sub
+
+Function HandleNoteExceedingRow34(ws As Worksheet, noteName As String, noteStartRow As Long, noteEndRow As Long, TB1Sheet As Worksheet) As Worksheet
+    ' Create a new worksheet for the note
+    Dim newWS As Worksheet
+    Dim targetWorkbook As Workbook
+    
+    ' Get the target workbook
+    Set targetWorkbook = ws.Parent
+    
+    ' Create the new worksheet in the target workbook
+    Set newWS = targetWorkbook.Sheets.Add(After:=ws)
+    ' newWS.Name = noteName
+    
+    ' Call the CreateHeader function to create the header in the new worksheet
+    CreateHeader newWS
+    
+    ' Find the first empty row after the header in the new worksheet
+    Dim newNoteStartRow As Long
+    newNoteStartRow = newWS.Cells(newWS.Rows.Count, 1).End(xlUp).row + 1
+    
+    ' Copy the note content to the new worksheet
+    ws.Range(ws.Cells(noteStartRow, 1), ws.Cells(noteEndRow, 11)).Copy
+    newWS.Cells(newNoteStartRow, 1).PasteSpecial xlPasteValues
+    newWS.Cells(newNoteStartRow, 1).PasteSpecial xlPasteFormats
+    Application.CutCopyMode = False
+    
+    ' Remove the note from the original worksheet
+    ws.Range(ws.Cells(noteStartRow, 1), ws.Cells(noteEndRow, 11)).Delete Shift:=xlUp
+    
+    ' Apply Thai Sarabun font and font size 14 to the new worksheet
+    newWS.Cells.Font.Name = "TH Sarabun New"
+    newWS.Cells.Font.Size = 14
+    
+    ' Set number format to use comma style for columns J and K in the new worksheet
+    newWS.Columns("J:K").NumberFormat = "#,##0.00"
+    
+    ' Return the new worksheet
+    Set HandleNoteExceedingRow34 = newWS
+End Function
+
 Sub AddGuaranteeNoteToFinancialStatements(targetWorkbook As Workbook)
     Dim ws As Worksheet
     Dim infoSheet As Worksheet
@@ -245,16 +351,16 @@ Sub AddGuaranteeNoteToFinancialStatements(targetWorkbook As Workbook)
             ws.Cells(lastRow + 3, "B").Value = "หมายเหตุประกอบงบการเงินเป็นส่วนหนึ่งของงบการเงินนี้"
             
             ' Add the second note
-            ws.Cells(lastRow + 5, "B").Value = "ขอรับรองว่าเป็นรายการอันถูกต้องและเป็นความจริง"
+            ws.Cells(lastRow + 5, "B").Value = "ข้อรับรองว่าเป็นรายการอันถูกต้องและเป็นความจริง"
             
             ' Add the signature line
             With ws.Cells(lastRow + 7, "C").Resize(1, 5)
                 .Merge
                 .HorizontalAlignment = xlCenter
                 If isLimitedPartnershipFlag Then
-                    .Value = "ลงชื่อ …………………………………………….............................................. หุ้นส่วนผู้จัดการ"
+                    .Value = "ลงชื่อ ……………………………………………………… หุ้นส่วนผู้จัดการ"
                 Else
-                    .Value = "ลงชื่อ …………………………………………….............................................. กรรมการตามอำนาจ"
+                    .Value = "ลงชื่อ ……………………………………………………… กรรมการตามอำนาจ"
                 End If
             End With
             
@@ -290,5 +396,12 @@ Function IsFinancialStatementRelated(sheetName As String) As Boolean
         Case Else
             IsFinancialStatementRelated = False
     End Select
+End Function
+
+Function isLimitedPartnership(targetWorkbook As Workbook) As Boolean
+    Dim infoSheet As Worksheet
+    Set infoSheet = targetWorkbook.Sheets("Info")
+    ' Check if the company type indicates limited partnership
+    isLimitedPartnership = (InStr(1, infoSheet.Range("B2").Value, "ห้างหุ้นส่วนจำกัด") > 0)
 End Function
 
