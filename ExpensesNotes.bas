@@ -23,10 +23,10 @@ Function CreateExpensesByNatureNote(ws As Worksheet) As Boolean
     noteStartRow = noteRow
 
     ' Increment the note order
-    noteOrder = noteOrder + 1
+    gNoteOrder = gNoteOrder + 1
 
     ' Create the note header
-    ws.Cells(noteRow, 1).Value = noteOrder + 2  ' Start from 3
+    ws.Cells(noteRow, 1).Value = gNoteOrder + 2  ' Start from 3
     ws.Cells(noteRow, 1).HorizontalAlignment = xlCenter
     ws.Cells(noteRow, 2).Value = "ค่าใช้จ่ายแยกตามลักษณะของค่าใช้จ่าย"
     
@@ -81,7 +81,7 @@ End Function
 Function CreateFinancialApprovalNote(ws As Worksheet) As Boolean
     Dim noteRow As Long
     Dim noteStartRow As Long
-    Static noteOrder As Integer
+    Static gNoteOrder As Integer
     Dim targetWorkbook As Workbook
     
     ' Get the target workbook
@@ -98,10 +98,10 @@ Function CreateFinancialApprovalNote(ws As Worksheet) As Boolean
     noteStartRow = noteRow
     
     ' Increment the note order
-    noteOrder = noteOrder + 1
+    gNoteOrder = gNoteOrder + 1
     
     ' Create the note header
-    ws.Cells(noteRow, 1).Value = noteOrder + 2
+    ws.Cells(noteRow, 1).Value = gNoteOrder + 2
     ws.Cells(noteRow, 1).HorizontalAlignment = xlCenter
     ws.Cells(noteRow, 2).Value = "การอนุมัติงบการเงิน"
     ws.Cells(noteRow, 2).Font.Bold = True
