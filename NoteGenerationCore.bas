@@ -15,13 +15,17 @@ Sub CreateMultiPeriodNotesFromTB1(ws As Worksheet, TB1Sheet As Worksheet)
     Call CreateMultiPeriodNoteFromTB1(ws, TB1Sheet, "สินทรัพย์อื่น", "1660", "1700")
     Call CreateMultiPeriodNoteFromTB1(ws, TB1Sheet, "เงินเบิกเกินบัญชีและเงินกู้ยืมระยะสั้นจากสถาบันการเงิน", "2001", "2009")
     Call CreateMultiPeriodNoteFromTB1(ws, TB1Sheet, "เจ้าหนี้การค้าและเจ้าหนี้หมุนเวียนอื่น", "2010", "2999", "2030,2045,2050,2051,2052,2100,2120,2121,2122,2123")
-    Call CreateMultiPeriodNoteFromTB1(ws, TB1Sheet, "เงินกู้ยืมระยะสั้นจากบุคคลหรือกิจการที่เกี่ยวข้องกัน", "2030", "2030")
+    Call CreateMultiPeriodNoteFromTB1(ws, TB1Sheet, "เงินกู้ยืมระยะยาวจากบุคคลหรือกิจการที่เกี่ยวข้องกัน", "2030", "2030")
     Call CreateLongTermLoansNoteFromTB1(ws, TB1Sheet)
     Call CreateMultiPeriodNoteFromTB1(ws, TB1Sheet, "เงินกู้ยืมระยะยาว", "2050", "2052")
     Call CreateMultiPeriodNoteFromTB1(ws, TB1Sheet, "เงินกู้ยืมระยะยาวจากบุคคลหรือกิจการที่เกี่ยวข้องกัน", "2100", "2100")
     Call CreateMultiPeriodNoteFromTB1(ws, TB1Sheet, "รายได้อื่น", "4020", "4999")
     Call CreateExpensesByNatureNote(ws)
     Call CreateFinancialApprovalNote(ws)
+    
+    ' CREATE DETAIL SHEETS - Add these calls at the end
+    Call CreateDetailOneFromTB1(ws.Parent, TB1Sheet)
+    Call CreateDetailTwoFromTB1(ws.Parent, TB1Sheet)
 End Sub
 
 Function CreateMultiPeriodNoteFromTB1(ws As Worksheet, TB1Sheet As Worksheet, noteName As String, accountCodeStart As String, accountCodeEnd As String, Optional excludeAccountCodes As String = "") As Boolean
