@@ -1,14 +1,10 @@
-Option Explicit
-
-Sub CreateDetailOne(targetWorkbook As Workbook)
+Sub CreateDetailOneFromTB1(targetWorkbook As Workbook, TB1Sheet As Worksheet)
     Dim detailWorksheet As Worksheet
-    Dim trialPLSheet As Worksheet
-    Dim lastRowPL As Long
+    Dim lastRowTB1 As Long
     Dim row As Long
     
     Set detailWorksheet = InitializeDetailWorksheet(targetWorkbook)
-    Set trialPLSheet = targetWorkbook.Sheets("Trial PL 1")
-    lastRowPL = trialPLSheet.Cells(trialPLSheet.Rows.Count, 1).End(xlUp).row
+    lastRowTB1 = TB1Sheet.Cells(TB1Sheet.Rows.Count, 2).End(xlUp).row
     
     ' Add header details
     detailWorksheet.Range("A4").Value = "รายละเอียดประกอบที่ 1"
@@ -18,12 +14,12 @@ Sub CreateDetailOne(targetWorkbook As Workbook)
     row = 5 ' Start row for details
     
     ' Process inventory if applicable
-    If HasInventory(trialPLSheet) Then
-        row = ProcessInventory(detailWorksheet, trialPLSheet, row)
+    If HasInventoryFromTB1(TB1Sheet) Then
+        row = ProcessInventoryFromTB1(detailWorksheet, TB1Sheet, row)
     End If
     
     ' Process service costs
-    row = ProcessServiceCosts(detailWorksheet, trialPLSheet, row)
+    row = ProcessServiceCostsFromTB1(detailWorksheet, TB1Sheet, row)
     
     ' Format worksheet
     FormatDetailWorksheet detailWorksheet
@@ -46,39 +42,38 @@ Function InitializeDetailWorksheet(targetWorkbook As Workbook) As Worksheet
     Set InitializeDetailWorksheet = ws
 End Function
 
-Function HasInventory(trialPLSheet As Worksheet) As Boolean
+Function HasInventoryFromTB1(TB1Sheet As Worksheet) As Boolean
     Dim i As Long
     Dim lastRow As Long
     
-    lastRow = trialPLSheet.Cells(trialPLSheet.Rows.Count, 1).End(xlUp).row
+    lastRow = TB1Sheet.Cells(TB1Sheet.Rows.Count, 2).End(xlUp).row
     
     ' Check for any 1510 account
     For i = 2 To lastRow
-        If trialPLSheet.Cells(i, 2).Value = "1510" Then
-            HasInventory = True
+        If TB1Sheet.Cells(i, 2).Value = "1510" Then
+            HasInventoryFromTB1 = True
             Exit Function
         End If
     Next i
     
-    ' If no 1510 found or it's zero, check for purchase accounts (5010)
+    ' If no 1510 found, check for purchase accounts (5010)
     For i = 2 To lastRow
         Dim accountCode As String
-        accountCode = trialPLSheet.Cells(i, 2).Value
+        accountCode = TB1Sheet.Cells(i, 2).Value
         
         ' Check for main purchase account and its subdivisions
         If Left(accountCode, 4) = "5010" Then
-            If trialPLSheet.Cells(i, 5).Value <> 0 Or _
-               trialPLSheet.Cells(i, 4).Value <> 0 Then
-                HasInventory = True
+            If TB1Sheet.Cells(i, 5).Value <> 0 Or TB1Sheet.Cells(i, 4).Value <> 0 Then
+                HasInventoryFromTB1 = True
                 Exit Function
             End If
         End If
     Next i
     
-    HasInventory = False
+    HasInventoryFromTB1 = False
 End Function
 
-Function ProcessInventory(ws As Worksheet, trialPLSheet As Worksheet, startRow As Long) As Long
+Function ProcessInventoryFromTB1(ws As Worksheet, TB1Sheet As Worksheet, startRow As Long) As Long
     Dim row As Long
     Dim inventoryForSale As Double
     Dim endingInventory As Double
@@ -91,21 +86,21 @@ Function ProcessInventory(ws As Worksheet, trialPLSheet As Worksheet, startRow A
     row = row + 1
     
     ' Add beginning inventory
-    inventoryForSale = AddBeginningInventory(ws, trialPLSheet, row)
+    inventoryForSale = AddBeginningInventoryFromTB1(ws, TB1Sheet, row)
     row = row + 1
     
     ' Process purchases
     Dim totalPurchases As Double
-    totalPurchases = ProcessPurchases(ws, trialPLSheet, row)
+    totalPurchases = ProcessPurchasesFromTB1(ws, TB1Sheet, row)
     inventoryForSale = inventoryForSale + totalPurchases
     
-    ' Add "สินค้ามีไว้เพื่อขาย"
-    ws.Cells(row, 2).Value = "สินค้ามีไว้เพื่อขาย"
+    ' Add "สินค้าไว้เพื่อขาย"
+    ws.Cells(row, 2).Value = "สินค้าไว้เพื่อขาย"
     ws.Cells(row, 9).Value = inventoryForSale
     row = row + 1
     
     ' Add ending inventory
-    endingInventory = AddEndingInventory(ws, trialPLSheet, row)
+    endingInventory = AddEndingInventoryFromTB1(ws, TB1Sheet, row)
     row = row + 1
     
     ' Calculate and add "ต้นทุนสินค้าที่ขาย"
@@ -115,40 +110,41 @@ Function ProcessInventory(ws As Worksheet, trialPLSheet As Worksheet, startRow A
     ws.Cells(row, 2).Font.Bold = True
     row = row + 1
     
-    ProcessInventory = row
+    ProcessInventoryFromTB1 = row
 End Function
 
-Function AddBeginningInventory(ws As Worksheet, trialPLSheet As Worksheet, row As Long) As Double
+Function AddBeginningInventoryFromTB1(ws As Worksheet, TB1Sheet As Worksheet, row As Long) As Double
     Dim i As Long
     Dim lastRow As Long
     Dim amount As Double
     
-    lastRow = trialPLSheet.Cells(trialPLSheet.Rows.Count, 1).End(xlUp).row
+    lastRow = TB1Sheet.Cells(TB1Sheet.Rows.Count, 2).End(xlUp).row
     
     ws.Cells(row, 2).Value = "สินค้าคงเหลือต้นงวด"
     For i = 2 To lastRow
-        If trialPLSheet.Cells(i, 2).Value = "1510" Then
-            amount = trialPLSheet.Cells(i, 6).Value
+        If TB1Sheet.Cells(i, 2).Value = "1510" Then
+            ' Use Column C (previous period) for beginning inventory
+            amount = TB1Sheet.Cells(i, 3).Value
             ws.Cells(row, 9).Value = amount
-            AddBeginningInventory = amount
+            AddBeginningInventoryFromTB1 = amount
             Exit Function
         End If
     Next i
 End Function
 
-Function ProcessPurchases(ws As Worksheet, trialPLSheet As Worksheet, ByRef row As Long) As Double
+Function ProcessPurchasesFromTB1(ws As Worksheet, TB1Sheet As Worksheet, ByRef row As Long) As Double
     Dim i As Long
     Dim lastRow As Long
     Dim accountCode As String
     Dim amount As Double
     Dim totalPurchases As Double
     
-    lastRow = trialPLSheet.Cells(trialPLSheet.Rows.Count, 1).End(xlUp).row
+    lastRow = TB1Sheet.Cells(TB1Sheet.Rows.Count, 2).End(xlUp).row
     
     ' Handle 5010 first
     For i = 2 To lastRow
-        If trialPLSheet.Cells(i, 2).Value = "5010" Then
-            amount = trialPLSheet.Cells(i, 5).Value
+        If TB1Sheet.Cells(i, 2).Value = "5010" Then
+            amount = TB1Sheet.Cells(i, 5).Value  ' Column E for current period
             ws.Cells(row, 2).Value = "บวก"
             ws.Cells(row, 3).Value = "ซื้อสินค้า"
             ws.Cells(row, 9).Value = amount
@@ -160,24 +156,24 @@ Function ProcessPurchases(ws As Worksheet, trialPLSheet As Worksheet, ByRef row 
     
     ' Handle other cases
     For i = 2 To lastRow
-        accountCode = trialPLSheet.Cells(i, 2).Value
+        accountCode = TB1Sheet.Cells(i, 2).Value
         Select Case accountCode
             Case "5010.1", "5010.2"
-                amount = -trialPLSheet.Cells(i, 4).Value
+                amount = -TB1Sheet.Cells(i, 6).Value  ' UPDATED: Use Column F with negative sign
                 ws.Cells(row, 2).Value = "หัก"
-                ws.Cells(row, 3).Value = IIf(accountCode = "5010.1", "ส่งคืนสินค้า", "ส่วนลดรับ")
+                ws.Cells(row, 3).Value = IIf(accountCode = "5010.1", "ส่วนลดสินค้า", "ส่วนลดรับ")
                 ws.Cells(row, 9).Value = amount
                 totalPurchases = totalPurchases - amount
                 row = row + 1
             Case "5010.3"
-                amount = trialPLSheet.Cells(i, 4).Value
+                amount = TB1Sheet.Cells(i, 6).Value  ' UPDATED: Column F for freight in
                 ws.Cells(row, 2).Value = "บวก"
                 ws.Cells(row, 3).Value = "ค่าขนส่งเข้า"
                 ws.Cells(row, 9).Value = amount
                 totalPurchases = totalPurchases + amount
                 row = row + 1
             Case "5010.4"
-                amount = trialPLSheet.Cells(i, 5).Value
+                amount = TB1Sheet.Cells(i, 5).Value  ' Column E for current period
                 ws.Cells(row, 3).Value = "ค่าแรงงานทางตรง"
                 ws.Cells(row, 9).Value = amount
                 totalPurchases = totalPurchases + amount
@@ -190,34 +186,34 @@ Function ProcessPurchases(ws As Worksheet, trialPLSheet As Worksheet, ByRef row 
     ws.Cells(row, 9).Value = totalPurchases
     row = row + 1
     
-    ProcessPurchases = totalPurchases
+    ProcessPurchasesFromTB1 = totalPurchases
 End Function
 
-Function AddEndingInventory(ws As Worksheet, trialPLSheet As Worksheet, row As Long) As Double
+Function AddEndingInventoryFromTB1(ws As Worksheet, TB1Sheet As Worksheet, row As Long) As Double
     Dim i As Long
     Dim lastRow As Long
     Dim firstOccurrence As Boolean
     Dim endingInventory As Double
     
-    lastRow = trialPLSheet.Cells(trialPLSheet.Rows.Count, 1).End(xlUp).row
+    lastRow = TB1Sheet.Cells(TB1Sheet.Rows.Count, 2).End(xlUp).row
     firstOccurrence = True
     
     ws.Cells(row, 2).Value = "หัก สินค้าคงเหลือปลายงวด"
     For i = 2 To lastRow
-        If trialPLSheet.Cells(i, 2).Value = "1510" Then
+        If TB1Sheet.Cells(i, 2).Value = "1510" Then
             If firstOccurrence Then
                 firstOccurrence = False
             Else
-                endingInventory = trialPLSheet.Cells(i, 6).Value
+                endingInventory = TB1Sheet.Cells(i, 5).Value  ' Column E for current period
                 ws.Cells(row, 9).Value = endingInventory
-                AddEndingInventory = endingInventory
+                AddEndingInventoryFromTB1 = endingInventory
                 Exit Function
             End If
         End If
     Next i
 End Function
 
-Function ProcessServiceCosts(ws As Worksheet, trialPLSheet As Worksheet, startRow As Long) As Long
+Function ProcessServiceCostsFromTB1(ws As Worksheet, TB1Sheet As Worksheet, startRow As Long) As Long
     Dim serviceCosts(10) As Double
     Dim serviceNames(10) As String
     Dim hasAmount(10) As Boolean
@@ -228,7 +224,7 @@ Function ProcessServiceCosts(ws As Worksheet, trialPLSheet As Worksheet, startRo
     Dim index As Integer
     Dim totalServiceCost As Double
     
-    lastRow = trialPLSheet.Cells(trialPLSheet.Rows.Count, 1).End(xlUp).row
+    lastRow = TB1Sheet.Cells(TB1Sheet.Rows.Count, 2).End(xlUp).row
     row = startRow
     
     ' Initialize arrays
@@ -240,9 +236,9 @@ Function ProcessServiceCosts(ws As Worksheet, trialPLSheet As Worksheet, startRo
     
     ' Process all accounts
     For i = 2 To lastRow
-        accountCode = trialPLSheet.Cells(i, 2).Value
-        accountName = trialPLSheet.Cells(i, 1).Value
-        amount = trialPLSheet.Cells(i, 5).Value
+        accountCode = TB1Sheet.Cells(i, 2).Value
+        accountName = TB1Sheet.Cells(i, 1).Value
+        amount = TB1Sheet.Cells(i, 5).Value  ' Column E for current period
         
         ' Check for service cost accounts (5011-5020 and their decimals)
         If Left(accountCode, 3) = "501" Then
@@ -285,15 +281,15 @@ Function ProcessServiceCosts(ws As Worksheet, trialPLSheet As Worksheet, startRo
         ws.Cells(row, 3).Font.Bold = True
         
         ' Add borders to the total cell
-    With ws.Cells(row, 9)
-        .Borders(xlEdgeTop).LineStyle = xlContinuous
-        .Borders(xlEdgeBottom).LineStyle = xlDouble
-    End With
-    
+        With ws.Cells(row, 9)
+            .Borders(xlEdgeTop).LineStyle = xlContinuous
+            .Borders(xlEdgeBottom).LineStyle = xlDouble
+        End With
+        
         row = row + 1
     End If
     
-    ProcessServiceCosts = row
+    ProcessServiceCostsFromTB1 = row
 End Function
 
 Sub FormatDetailWorksheet(ws As Worksheet)
@@ -305,10 +301,9 @@ Sub FormatDetailWorksheet(ws As Worksheet)
     ws.Columns("I").NumberFormat = "#,##0.00"
 End Sub
 
-Sub CreateDetailTwo(targetWorkbook As Workbook)
+Sub CreateDetailTwoFromTB1(targetWorkbook As Workbook, TB1Sheet As Worksheet)
     Dim detailWorksheet As Worksheet
-    Dim trialPLSheet As Worksheet
-    Dim lastRowPL As Long
+    Dim lastRowTB1 As Long
     Dim i As Long
     Dim accountCode As String
     Dim accountName As String
@@ -318,9 +313,8 @@ Sub CreateDetailTwo(targetWorkbook As Workbook)
     Dim financialCosts As Double
     
     ' Initialize and set up worksheet
-    Set detailWorksheet = InitializeWorksheet(targetWorkbook)
-    Set trialPLSheet = targetWorkbook.Sheets("Trial PL 1")
-    lastRowPL = trialPLSheet.Cells(trialPLSheet.Rows.Count, 1).End(xlUp).row
+    Set detailWorksheet = InitializeWorksheetTwo(targetWorkbook)
+    lastRowTB1 = TB1Sheet.Cells(TB1Sheet.Rows.Count, 2).End(xlUp).row
     
     ' Create headers
     CreateDetailHeaders detailWorksheet
@@ -329,11 +323,11 @@ Sub CreateDetailTwo(targetWorkbook As Workbook)
     row = 6
     dataStartRow = row
     
-    ' Process trial balance data
-    For i = 2 To lastRowPL
-        accountCode = trialPLSheet.Cells(i, 2).Value
-        accountName = trialPLSheet.Cells(i, 1).Value
-        amount = trialPLSheet.Cells(i, 6).Value
+    ' Process TB1 data
+    For i = 2 To lastRowTB1
+        accountCode = TB1Sheet.Cells(i, 2).Value
+        accountName = TB1Sheet.Cells(i, 1).Value
+        amount = TB1Sheet.Cells(i, 5).Value  ' Column E for current period
         
         ' Check if the account code is within our range and not 5910
         If accountCode >= "5300" And accountCode <= "5999" And accountCode <> "5910" Then
@@ -342,7 +336,7 @@ Sub CreateDetailTwo(targetWorkbook As Workbook)
                 financialCosts = financialCosts + amount
             Else
                 ' Process other accounts
-                ProcessAccount detailWorksheet, accountCode, accountName, amount, row
+                ProcessAccountFromTB1 detailWorksheet, accountCode, accountName, amount, row
             End If
         End If
     Next i
@@ -357,7 +351,7 @@ Sub CreateDetailTwo(targetWorkbook As Workbook)
     FormatDetailWorksheetTwo detailWorksheet, dataStartRow, row
 End Sub
 
-Function InitializeWorksheet(targetWorkbook As Workbook) As Worksheet
+Function InitializeWorksheetTwo(targetWorkbook As Workbook) As Worksheet
     Dim ws As Worksheet
     
     On Error Resume Next
@@ -371,7 +365,7 @@ Function InitializeWorksheet(targetWorkbook As Workbook) As Worksheet
     
     CreateHeader ws, "Details"
     
-    Set InitializeWorksheet = ws
+    Set InitializeWorksheetTwo = ws
 End Function
 
 Sub CreateDetailHeaders(ws As Worksheet)
@@ -399,7 +393,7 @@ Sub CreateDetailHeaders(ws As Worksheet)
     End With
 End Sub
 
-Sub ProcessAccount(ws As Worksheet, accountCode As String, accountName As String, amount As Double, ByRef row As Long)
+Sub ProcessAccountFromTB1(ws As Worksheet, accountCode As String, accountName As String, amount As Double, ByRef row As Long)
     With ws.Range(ws.Cells(row, 1), ws.Cells(row, 6))
         .Merge
         .Value = accountName
@@ -430,7 +424,7 @@ Sub ProcessAccount(ws As Worksheet, accountCode As String, accountName As String
 End Sub
 
 Function AddTotalRow(ws As Worksheet, dataStartRow As Long, row As Long) As Long
-    Dim i As Long  ' Declare the loop variable
+    Dim i As Long ' Declare the loop variable
     
     With ws.Range(ws.Cells(row, 1), ws.Cells(row, 6))
         .Merge
