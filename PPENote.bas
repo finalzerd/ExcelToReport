@@ -29,7 +29,7 @@ Function CreateNoteForLandBuildingEquipmentFromTB1(ws As Worksheet, TB1Sheet As 
     noteRow = ws.Cells(ws.Rows.Count, 1).End(xlUp).row + 1
     noteStartRow = noteRow
 
-    ' Increment the global note order
+    ' FIXED: Use global note order instead of local variable
     gNoteOrder = gNoteOrder + 1
 
     ' Create the note header
@@ -39,11 +39,11 @@ Function CreateNoteForLandBuildingEquipmentFromTB1(ws As Worksheet, TB1Sheet As 
     ws.Cells(noteRow, 9).Value = "หน่วย : บาท"
     noteRow = noteRow + 1
 
-    ' Add column headers
-    ws.Cells(noteRow, 4).Value = "ณ 31 ธ.ค. " & years(2)
+    ' Add column headers - FIXED: Match original format exactly
+    ws.Cells(noteRow, 4).Value = "ณ 31 ธ.ค. " & years(2)  ' Previous year first
     ws.Cells(noteRow, 6).Value = "ซื้อเพิ่ม"
     ws.Cells(noteRow, 7).Value = "จำหน่ายออก"
-    ws.Cells(noteRow, 9).Value = "ณ 31 ธ.ค. " & years(1)
+    ws.Cells(noteRow, 9).Value = "ณ 31 ธ.ค. " & years(1)  ' Current year last
     noteRow = noteRow + 1
 
     ' Add "ราคาทุนเดิม"
@@ -58,20 +58,17 @@ Function CreateNoteForLandBuildingEquipmentFromTB1(ws As Worksheet, TB1Sheet As 
         ' Check if the account code is within range and doesn't contain a decimal
         If accountCode >= "1610" And accountCode <= "1659" And InStr(accountCode, ".") = 0 Then
             accountName = TB1Sheet.Cells(i, 1).Value
-            amountCurrent = TB1Sheet.Cells(i, 4).Value  ' Current period
-            amountPrevious = TB1Sheet.Cells(i, 3).Value  ' Previous period
+            ' UPDATED: For assets - Column I from TB1 Column E, Column D from TB1 Column C
+            amountPrevious = TB1Sheet.Cells(i, 3).Value  ' Column C = Previous period
+            amountCurrent = TB1Sheet.Cells(i, 5).Value   ' Column E = Current period
             
             ' Add the account detail to the note
             ws.Cells(noteRow, 3).Value = accountName
-            ws.Cells(noteRow, 4).Value = amountPrevious
-            ws.Cells(noteRow, 9).Value = amountCurrent
+            ws.Cells(noteRow, 4).Value = amountPrevious  ' Previous year in column 4 (from TB1 Col C)
+            ws.Cells(noteRow, 9).Value = amountCurrent   ' Current year in column 9 (from TB1 Col E)
             
-            ' Calculate purchase or sale
-            If amountCurrent > amountPrevious Then
-                ws.Cells(noteRow, 6).Value = amountCurrent - amountPrevious
-            ElseIf amountCurrent < amountPrevious Then
-                ws.Cells(noteRow, 7).Value = amountPrevious - amountCurrent
-            End If
+            ' Calculate purchase (Column F) = difference between Column I and Column D
+            ws.Cells(noteRow, 6).Value = amountCurrent - amountPrevious  ' Always show as purchase
             
             noteRow = noteRow + 1
             noteCreated = True
@@ -95,7 +92,7 @@ Function CreateNoteForLandBuildingEquipmentFromTB1(ws As Worksheet, TB1Sheet As 
     Else
         ' If no account details were added, remove the note header
         ws.Range(ws.Cells(noteStartRow, 1), ws.Cells(noteRow, 11)).ClearContents
-        gNoteOrder = gNoteOrder - 1  ' Decrement the note order if note was not created
+        gNoteOrder = gNoteOrder - 1  ' FIXED: Decrement global note order
         CreateNoteForLandBuildingEquipmentFromTB1 = False
         Exit Function
     End If
@@ -112,15 +109,16 @@ Function CreateNoteForLandBuildingEquipmentFromTB1(ws As Worksheet, TB1Sheet As 
         ' Check if the account code is within range and contains a decimal
         If accountCode >= "1610" And accountCode <= "1659" And InStr(accountCode, ".") > 0 Then
             accountName = TB1Sheet.Cells(i, 1).Value
-            amountCurrent = TB1Sheet.Cells(i, 4).Value  ' Current period
-            amountPrevious = TB1Sheet.Cells(i, 3).Value  ' Previous period
+            ' UPDATED: For depreciation - Column I from TB1 Column F (as is), Column D from TB1 Column C (made positive)
+            amountPrevious = TB1Sheet.Cells(i, 3).Value * (-1)  ' Column C made positive
+            amountCurrent = TB1Sheet.Cells(i, 6).Value          ' Column F as is
             
             ' Add the account detail to the note
             ws.Cells(noteRow, 3).Value = accountName
-            ws.Cells(noteRow, 4).Value = amountPrevious
-            ws.Cells(noteRow, 9).Value = amountCurrent
+            ws.Cells(noteRow, 4).Value = amountPrevious  ' Previous year in column 4 (positive)
+            ws.Cells(noteRow, 9).Value = amountCurrent   ' Current year in column 9 (as is)
             
-            ' Calculate changes in accumulated depreciation
+            ' Calculate changes in accumulated depreciation (Column F) = difference
             ws.Cells(noteRow, 6).Value = amountCurrent - amountPrevious
             
             noteRow = noteRow + 1
