@@ -56,6 +56,7 @@ End Function
 Public Sub GenerateFinancialStatement(targetWorkbook As Workbook)
     Dim ws As Worksheet
     Dim TB1Sheet As Worksheet
+    Dim response As VbMsgBoxResult
     
     ' Set the worksheet object for notes
     On Error Resume Next
@@ -80,15 +81,30 @@ Public Sub GenerateFinancialStatement(targetWorkbook As Workbook)
         Exit Sub
     End If
     
-    ' Focus only on note generation for now
-    ' Determine if this is single or multiple period based on data structure
-    ' For now, assume multiple period (as specified in requirements)
-    If CreateHeader(ws) Then
-        CreateMultiPeriodNotesFromTB1 ws, TB1Sheet
-    Else
-        MsgBox "Failed to create header.", vbExclamation
-        Exit Sub
-    End If
+    ' Ask user what they want to generate
+    response = MsgBox("What would you like to generate?" & vbNewLine & vbNewLine & _
+                     "YES = Financial Notes Only" & vbNewLine & _
+                     "NO = Balance Sheet & P&L Only" & vbNewLine & _
+                     "CANCEL = Everything (Notes + Balance Sheet + P&L)", _
+                     vbYesNoCancel + vbQuestion, "Select Generation Type")
+    
+    Select Case response
+        Case vbYes
+            ' Generate Notes Only
+            GenerateNotesOnly targetWorkbook, ws, TB1Sheet
+            
+        Case vbNo
+            ' Generate Balance Sheet & P&L Only
+            GenerateBalanceSheetAndPLOnly targetWorkbook
+            
+        Case vbCancel
+            ' Generate Everything
+            GenerateEverything targetWorkbook, ws, TB1Sheet
+            
+        Case Else
+            MsgBox "No selection made. Operation cancelled.", vbInformation
+            Exit Sub
+    End Select
     
     Exit Sub
     
@@ -97,9 +113,103 @@ TB1NotFound:
     Exit Sub
 End Sub
 
-Function GetWorksheetsWithPrefix(wb As Workbook, prefix As String) As Collection
+Private Sub GenerateNotesOnly(targetWorkbook As Workbook, ws As Worksheet, TB1Sheet As Worksheet)
+    ' Focus only on note generation
+    If CreateHeader(ws) Then
+        CreateMultiPeriodNotesFromTB1 ws, TB1Sheet
+        MsgBox "Financial notes generated successfully!", vbInformation
+    Else
+        MsgBox "Failed to create header.", vbExclamation
+    End If
+End Sub
+
+Private Sub GenerateBalanceSheetAndPLOnly(targetWorkbook As Workbook)
+    Dim userChoice As VbMsgBoxResult
+    
+    ' Ask user which financial statements to generate
+    userChoice = MsgBox("Which financial statements would you like to generate?" & vbNewLine & vbNewLine & _
+                       "YES = Balance Sheet Only" & vbNewLine & _
+                       "NO = Profit & Loss Only" & vbNewLine & _
+                       "CANCEL = Both Balance Sheet & P&L", _
+                       vbYesNoCancel + vbQuestion, "Select Financial Statements")
+    
+    Select Case userChoice
+        Case vbYes
+            ' Generate Balance Sheet only
+            GenerateBalanceSheetFromTB1
+            MsgBox "Balance Sheet generated successfully!" & vbNewLine & _
+                   "Sheets created: MPA_TB1 (Assets), MPL_TB1 (Liabilities & Equity)", vbInformation
+            
+        Case vbNo
+            ' Generate P&L only
+            GenerateProfitLossFromTB1
+            MsgBox "Profit & Loss Statement generated successfully!" & vbNewLine & _
+                   "Sheet created: PLM_TB1", vbInformation
+            
+        Case vbCancel
+            ' Generate both
+            GenerateBalanceSheetFromTB1
+            GenerateProfitLossFromTB1
+            MsgBox "Balance Sheet and Profit & Loss Statement generated successfully!" & vbNewLine & _
+                   "Sheets created: MPA_TB1, MPL_TB1, PLM_TB1", vbInformation
+            
+        Case Else
+            MsgBox "No selection made. Operation cancelled.", vbInformation
+    End Select
+End Sub
+
+Private Sub GenerateEverything(targetWorkbook As Workbook, ws As Worksheet, TB1Sheet As Worksheet)
+    Dim success As Boolean
+    success = True
+    
+    ' Generate Notes
+    If CreateHeader(ws) Then
+        CreateMultiPeriodNotesFromTB1 ws, TB1Sheet
+    Else
+        MsgBox "Failed to create header for notes.", vbExclamation
+        success = False
+    End If
+    
+    ' Generate Balance Sheet
+    On Error Resume Next
+    GenerateBalanceSheetFromTB1
+    If Err.Number <> 0 Then
+        MsgBox "Error generating Balance Sheet: " & Err.Description, vbExclamation
+        success = False
+        Err.Clear
+    End If
+    On Error GoTo 0
+    
+    ' Generate P&L
+    On Error Resume Next
+    GenerateProfitLossFromTB1
+    If Err.Number <> 0 Then
+        MsgBox "Error generating Profit & Loss: " & Err.Description, vbExclamation
+        success = False
+        Err.Clear
+    End If
+    On Error GoTo 0
+    
+    If success Then
+        MsgBox "Complete financial statements generated successfully!" & vbNewLine & vbNewLine & _
+               "Generated:" & vbNewLine & _
+               "• Financial Notes (N1)" & vbNewLine & _
+               "• Balance Sheet Assets (MPA_TB1)" & vbNewLine & _
+               "• Balance Sheet Liabilities & Equity (MPL_TB1)" & vbNewLine & _
+               "• Profit & Loss Statement (PLM_TB1)", vbInformation
+    Else
+        MsgBox "Financial statement generation completed with some errors. Please check the results.", vbExclamation
+    End If
+End Sub
+
+' TB1-Specific Helper Functions
+Function GetWorksheetsWithPrefix(prefix As String) As Collection
     Dim ws As Worksheet
     Dim matchingSheets As New Collection
+    Dim wb As Workbook
+    
+    ' Use the active workbook
+    Set wb = ActiveWorkbook
     
     For Each ws In wb.Worksheets
         If Left(ws.Name, Len(prefix)) = prefix Then
@@ -109,4 +219,58 @@ Function GetWorksheetsWithPrefix(wb As Workbook, prefix As String) As Collection
     
     Set GetWorksheetsWithPrefix = matchingSheets
 End Function
+
+' Overloaded version for specific workbook
+Function GetWorksheetsWithPrefixInWorkbook(wb As Workbook, prefix As String) As Collection
+    Dim ws As Worksheet
+    Dim matchingSheets As New Collection
+    
+    For Each ws In wb.Worksheets
+        If Left(ws.Name, Len(prefix)) = prefix Then
+            matchingSheets.Add ws
+        End If
+    Next ws
+    
+    Set GetWorksheetsWithPrefixInWorkbook = matchingSheets
+End Function
+
+' Quick test procedures for individual components
+Public Sub TestNotesGeneration()
+    Dim ws As Worksheet
+    Dim TB1Sheet As Worksheet
+    
+    On Error GoTo ErrorHandler
+    Set TB1Sheet = ActiveWorkbook.Sheets("TB1")
+    Set ws = ActiveWorkbook.Sheets("N1")
+    
+    If CreateHeader(ws) Then
+        CreateMultiPeriodNotesFromTB1 ws, TB1Sheet
+        MsgBox "Notes generation test completed!", vbInformation
+    End If
+    
+    Exit Sub
+    
+ErrorHandler:
+    MsgBox "Error in test: " & Err.Description, vbCritical
+End Sub
+
+Public Sub TestBalanceSheetGeneration()
+    On Error GoTo ErrorHandler
+    GenerateBalanceSheetFromTB1
+    MsgBox "Balance Sheet generation test completed!", vbInformation
+    Exit Sub
+    
+ErrorHandler:
+    MsgBox "Error in test: " & Err.Description, vbCritical
+End Sub
+
+Public Sub TestProfitLossGeneration()
+    On Error GoTo ErrorHandler
+    GenerateProfitLossFromTB1
+    MsgBox "P&L generation test completed!", vbInformation
+    Exit Sub
+    
+ErrorHandler:
+    MsgBox "Error in test: " & Err.Description, vbCritical
+End Sub
 
